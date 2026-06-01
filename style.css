@@ -1,7 +1,7 @@
 /* 
 ========================================================================
    SARAHGLAM'S - LUXURY HOME MAKEUP ARTIST BRAND
-   Core Design System & Stylesheets
+   Core Desigddn System & Stylesheets
 ========================================================================
 */
 
@@ -11,30 +11,41 @@
 /* --- Root Variables & Design System --- */
 :root {
   /* Elegant Color Palette */
-  --color-primary: #b76e79;          /* Core Rose Gold */
-  --color-primary-light: #c38d9e;    /* Blush Rose Gold */
-  --color-primary-dark: #8c4e57;     /* Deep Muted Rose */
-  --color-secondary: #e5a93b;        /* Champagne Gold accent */
-  --color-blush: #fde2e4;            /* Soft romantic blush */
-  --color-blush-light: #fff5f6;      /* Bright blush pink */
-  --color-champagne: #f7ebe1;        /* Creamy champagne */
-  --color-nude: #e6d5c3;             /* Warm nude */
-  --color-ivory: #fdfaf6;            /* Premium off-white base */
-  --color-dark: #2b2224;             /* High-contrast dark espresso */
-  --color-dark-muted: #5e5052;       /* Medium warm grey-brown */
+  --color-primary: #b76e79;
+  /* Core Rose Gold */
+  --color-primary-light: #c38d9e;
+  /* Blush Rose Gold */
+  --color-primary-dark: #8c4e57;
+  /* Deep Muted Rose */
+  --color-secondary: #e5a93b;
+  /* Champagne Gold accent */
+  --color-blush: #fde2e4;
+  /* Soft romantic blush */
+  --color-blush-light: #fff5f6;
+  /* Bright blush pink */
+  --color-champagne: #f7ebe1;
+  /* Creamy champagne */
+  --color-nude: #e6d5c3;
+  /* Warm nude */
+  --color-ivory: #fdfaf6;
+  /* Premium off-white base */
+  --color-dark: #2b2224;
+  /* High-contrast dark espresso */
+  --color-dark-muted: #5e5052;
+  /* Medium warm grey-brown */
   --color-white: #ffffff;
-  
+
   /* Gradients */
   --grad-rose-gold: linear-gradient(135deg, #b76e79 0%, #d89fa8 50%, #e5a93b 100%);
   --grad-rose-gold-hover: linear-gradient(135deg, #c38d9e 0%, #e2b4be 50%, #f0c369 100%);
   --grad-soft-fade: linear-gradient(180deg, var(--color-ivory) 0%, var(--color-blush-light) 100%);
   --grad-dark-overlay: linear-gradient(to bottom, rgba(43, 34, 36, 0.1) 0%, rgba(43, 34, 36, 0.6) 100%);
-  
+
   /* Typography */
   --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Montserrat', Helvetica, Arial, sans-serif;
   --font-script: 'Alex Brush', cursive;
-  
+
   /* Shadows & Borders */
   --shadow-soft: 0 10px 30px rgba(183, 110, 121, 0.06);
   --shadow-premium: 0 15px 45px rgba(43, 34, 36, 0.08);
@@ -43,18 +54,20 @@
   --border-radius-md: 16px;
   --border-radius-lg: 24px;
   --border-radius-pill: 50px;
-  
+
   /* Animations & Transitions */
   --transition-fast: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-normal: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-  
+
   /* Container layout */
   --container-width: 1200px;
 }
 
 /* --- Reset & Base Styles --- */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -62,7 +75,8 @@
 
 html {
   scroll-behavior: smooth;
-  font-size: 16px; /* Base size */
+  font-size: 16px;
+  /* Base size */
 }
 
 body {
@@ -87,7 +101,10 @@ a {
   transition: var(--transition-fast);
 }
 
-button, input, select, textarea {
+button,
+input,
+select,
+textarea {
   font-family: inherit;
   font-size: inherit;
   color: inherit;
@@ -107,7 +124,10 @@ button, input, select, textarea {
 }
 
 /* --- Section Typography --- */
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   font-family: var(--font-serif);
   font-weight: 500;
   letter-spacing: 0.02em;
@@ -288,7 +308,8 @@ h1, h2, h3, h4 {
 }
 
 .nav-menu {
-  display: none; /* Mobile first, hidden by default */
+  display: none;
+  /* Mobile first, hidden by default */
   gap: 2rem;
   list-style: none;
   align-items: center;
@@ -321,7 +342,8 @@ h1, h2, h3, h4 {
 }
 
 .nav-cta {
-  display: none; /* Hide on mobile navbar */
+  display: none;
+  /* Hide on mobile navbar */
 }
 
 /* Hamburger Menu Button */
@@ -366,7 +388,7 @@ h1, h2, h3, h4 {
   background-color: var(--color-ivory);
   z-index: 999;
   padding: 6rem 2rem 2rem;
-  box-shadow: -10px 0 30px rgba(0,0,0,0.05);
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -484,7 +506,8 @@ h1, h2, h3, h4 {
 }
 
 .hero-img-frame {
-  border-radius: 200px 200px 20px 20px; /* Luxury arch curve shape */
+  border-radius: 200px 200px 20px 20px;
+  /* Luxury arch curve shape */
   overflow: hidden;
   box-shadow: var(--shadow-premium);
   border: 8px solid var(--color-white);
@@ -1181,7 +1204,7 @@ textarea.form-input {
   height: 80px;
   width: auto;
   margin-bottom: 1rem;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 .footer-brand-title {
@@ -1358,26 +1381,27 @@ textarea.form-input {
   .hero-title {
     font-size: 3.5rem;
   }
+
   .hero-title span {
     font-size: 4.5rem;
   }
-  
+
   .hero-actions {
     flex-direction: row;
   }
-  
+
   .about-features {
     grid-template-columns: 1fr 1fr;
   }
-  
+
   .services-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .gallery-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .booking-card {
     padding: 3rem;
   }
@@ -1385,103 +1409,105 @@ textarea.form-input {
 
 /* Medium Tablets & iPads (768px and up) */
 @media (min-width: 768px) {
-  h1, h2 {
+
+  h1,
+  h2 {
     line-height: 1.2;
   }
-  
+
   .section-title {
     font-size: 3rem;
   }
-  
+
   /* Hero layout side-by-side */
   .hero-grid {
     grid-template-columns: 1.1fr 0.9fr;
     gap: 2rem;
   }
-  
+
   .hero-content {
     text-align: left;
   }
-  
+
   .hero-desc {
     margin-left: 0;
   }
-  
+
   .hero-actions {
     justify-content: flex-start;
   }
-  
+
   /* About layout side-by-side */
   .about-grid {
     grid-template-columns: 0.9fr 1.1fr;
     gap: 4rem;
   }
-  
+
   .about-content {
     text-align: left;
   }
-  
+
   .about-content .script-accent {
     text-align: left;
   }
-  
+
   .experience-badge {
     left: -25px;
     bottom: 30px;
   }
-  
+
   /* Services grid */
   .services-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   /* Testimonials Grid */
   .testimonials-slider {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   /* Booking layout side-by-side */
   .booking-grid {
     grid-template-columns: 0.9fr 1.1fr;
     gap: 4rem;
     align-items: center;
   }
-  
+
   .booking-info {
     text-align: left;
   }
-  
+
   .booking-info .script-accent {
     text-align: left;
   }
-  
+
   .booking-meta {
     margin-left: 0;
   }
-  
+
   .form-row {
     grid-template-columns: 1fr 1fr;
   }
-  
+
   .form-actions {
     flex-direction: row;
   }
-  
+
   .form-actions .btn {
     flex: 1;
   }
-  
+
   /* Footer layout */
   .footer-top {
     grid-template-columns: repeat(3, 1fr);
     text-align: left;
     gap: 3rem;
   }
-  
+
   .footer-brand {
     align-items: flex-start;
   }
-  
+
   .footer-logo {
     margin-left: 0;
   }
@@ -1489,42 +1515,44 @@ textarea.form-input {
 
 /* Laptops & Desktops (992px and up) */
 @media (min-width: 992px) {
+
   /* Navigation desktop layout */
   .burger-menu {
     display: none;
   }
-  
+
   .nav-menu {
     display: flex;
   }
-  
+
   .nav-cta {
     display: inline-flex;
   }
-  
+
   /* Expanded Hero */
   .hero-title {
     font-size: 4rem;
   }
+
   .hero-title span {
     font-size: 5.2rem;
   }
-  
+
   /* Expanded Services */
   .services-grid {
     grid-template-columns: repeat(3, 1fr);
   }
-  
+
   /* Gallery Grid */
   .gallery-grid {
     grid-template-columns: repeat(3, 1fr);
   }
-  
+
   /* Testimonials Grid */
   .testimonials-slider {
     grid-template-columns: repeat(3, 1fr);
   }
-  
+
   /* Footer */
   .footer-bottom {
     flex-direction: row;
@@ -1537,10 +1565,11 @@ textarea.form-input {
   .hero-title {
     font-size: 4.4rem;
   }
+
   .hero-title span {
     font-size: 5.8rem;
   }
-  
+
   .about-features {
     gap: 2rem;
   }
