@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO & Meta Tags - dedicated Services & Tarifs Marrakech -->
+  <title>Tarifs & Services Maquillage Marrakech | Sarahglam's</title>
+  <meta name="description" content="Découvrez la carte complète des tarifs de maquillage à domicile à Marrakech par Sarahglam's. Maquillage de mariée, fiançailles, soirée et shooting à Marrakech Gueliz.">
+  <meta name="keywords" content="tarifs maquillage marrakech, prix maquilleuse marrakech, maquillage mariee marrakech tarif, maquillage domicile marrakech prix, maquilleuse professionnel marrakech">
+  <meta name="author" content="Sarahglam's Marrakech">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/logo-clean.png">
+
+  <!-- Core Stylesheets -->
+  <link rel="stylesheet" href="style.css">
+  
+  <style>
+    /* Dedicated Page Layout Styles */
+    .services-hero {
+      background: var(--grad-soft-fade);
+      padding: 140px 0 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .services-hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background: linear-gradient(to top, var(--color-white), transparent);
+    }
+    
+    .services-detail-section {
+      padding: 80px 0;
+      background-color: var(--color-white);
+    }
+    
+    .service-detail-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      margin-bottom: 5rem;
+    }
+    
+    .service-detail-card {
+      background-color: var(--color-ivory);
+      border-radius: var(--border-radius-lg);
+      padding: 3rem 2rem;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(183, 110, 121, 0.08);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .service-detail-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 5px;
+      background: var(--grad-rose-gold);
+    }
+    
+    .detail-content h3 {
+      font-size: 2rem;
+      color: var(--color-dark);
+      margin-bottom: 0.8rem;
+    }
+    
+    .detail-tagline {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-primary);
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+    
+    .detail-text {
+      font-size: 0.95rem;
+      color: var(--color-dark-muted);
+      font-weight: 300;
+      line-height: 1.7;
+      margin-bottom: 1.8rem;
+    }
+    
+    .inclusions-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.8rem;
+    }
+    
+    .inclusion-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.9rem;
+      color: var(--color-dark);
+      font-weight: 500;
+    }
+    
+    .inclusion-item svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--color-primary);
+      flex-shrink: 0;
+    }
+    
+    .detail-price-box {
+      background: var(--color-white);
+      border-radius: var(--border-radius-md);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(183, 110, 121, 0.05);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .detail-price-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-dark-muted);
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    
+    .detail-price-value {
+      font-family: var(--font-serif);
+      font-size: 2.8rem;
+      color: var(--color-primary);
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    
+    .detail-price-info {
+      font-size: 0.8rem;
+      color: var(--color-dark-muted);
+      font-weight: 300;
+      margin-bottom: 1.8rem;
+    }
+    
+    /* FAQ Accordion Styles */
+    .faq-section {
+      padding: 80px 0;
+      background-color: var(--color-ivory);
+    }
+    
+    .faq-container {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    
+    .faq-card {
+      background-color: var(--color-white);
+      border-radius: var(--border-radius-md);
+      padding: 1.8rem 2rem;
+      box-shadow: var(--shadow-soft);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      border: 1px solid rgba(183, 110, 121, 0.03);
+    }
+    
+    .faq-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .faq-question {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      color: var(--color-dark);
+      font-weight: 500;
+    }
+    
+    .faq-icon {
+      width: 24px;
+      height: 24px;
+      color: var(--color-primary);
+      transition: transform var(--transition-fast);
+    }
+    
+    .faq-answer {
+      font-size: 0.95rem;
+      color: var(--color-dark-muted);
+      font-weight: 300;
+      line-height: 1.7;
+      margin-top: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height var(--transition-normal), margin var(--transition-normal);
+    }
+    
+    /* Active FAQ state */
+    .faq-card.active .faq-icon {
+      transform: rotate(180deg);
+    }
+    
+    .faq-card.active .faq-answer {
+      margin-top: 1.2rem;
+      max-height: 200px; /* Standard wrap */
+    }
+    
+    /* Table & Desktop scaling */
+    @media (min-width: 768px) {
+      .service-detail-card {
+        grid-template-columns: 1.3fr 0.7fr;
+        gap: 3rem;
+      }
+      .detail-price-box {
+        height: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       STICKY HEADER & NAVIGATION
+       ======================================================================== -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="index.html#accueil" class="logo-wrap" aria-label="Sarahglam's Marrakech Accueil">
+        <img src="assets/logo-clean.png" alt="Sarahglam's Logo" class="logo-img">
+      </a>
+      
+      <!-- Desktop Navigation Menu -->
+      <nav aria-label="Navigation principale">
+        <ul class="nav-menu">
+          <li><a href="index.html#accueil" class="nav-link">Accueil</a></li>
+          <li><a href="index.html#a-propos" class="nav-link">À Propos</a></li>
+          <li><a href="services.html" class="nav-link active">Services & Tarifs</a></li>
+          <li><a href="index.html#galerie" class="nav-link">Galerie</a></li>
+          <li><a href="index.html#temoignages" class="nav-link">Avis</a></li>
+          <li><a href="index.html#reservation" class="nav-link">Réservation</a></li>
+        </ul>
+      </nav>
+
+      <!-- Desktop Call to Action -->
+      <div class="nav-cta">
+        <a href="index.html#reservation" class="btn btn-primary">Réserver</a>
+      </div>
+
+      <!-- Hamburger Menu for Mobile -->
+      <button class="burger-menu" aria-label="Ouvrir le menu de navigation" aria-expanded="false">
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Sidebar -->
+  <aside class="mobile-nav" aria-label="Navigation mobile">
+    <nav>
+      <ul class="mobile-nav-list">
+        <li><a href="index.html#accueil" class="mobile-nav-link">Accueil</a></li>
+        <li><a href="index.html#a-propos" class="mobile-nav-link">À Propos</a></li>
+        <li><a href="services.html" class="mobile-nav-link">Services & Tarifs</a></li>
+        <li><a href="index.html#galerie" class="mobile-nav-link">Galerie</a></li>
+        <li><a href="index.html#temoignages" class="mobile-nav-link">Avis</a></li>
+        <li><a href="index.html#reservation" class="mobile-nav-link">Réservation</a></li>
+      </ul>
+    </nav>
+    <div class="mobile-nav-cta">
+      <a href="index.html#reservation" class="btn btn-primary">Réserver un maquillage</a>
+    </div>
+  </aside>
+
+  <main>
+    <!-- ========================================================================
+         SERVICES HERO BANNER
+         ======================================================================== -->
+    <section class="services-hero watermark-bg">
+      <div class="container reveal active">
+        <span class="script-accent">Tarifs & Prestations</span>
+        <h1 class="hero-title" style="font-size: 3rem; margin-bottom: 1rem;">
+          Carte des Services à Marrakech
+        </h1>
+        <p class="hero-desc" style="max-width: 600px;">
+          Des formules sur-mesure haut de gamme pour sublimer votre beauté naturelle lors de vos événements d'exception à Marrakech.
+        </p>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         DETAILED SERVICES & TARIFFS SECTION
+         ======================================================================== -->
+    <section class="services-detail-section">
+      <div class="container">
+        <div class="service-detail-grid">
+          
+          <!-- Card 1: Mariée -->
+          <div class="service-detail-card reveal">
+            <div class="detail-content">
+              <span class="detail-tagline">Le plus prestigieux</span>
+              <h3>Maquillage Mariée Royale</h3>
+              <p class="detail-text">
+                Pour le jour le plus inoubliable de votre vie, profitez d'une mise en beauté majestueuse. J'étudie votre type de peau, vos préférences et votre style pour concevoir un maquillage nuptial intemporel et résistant qui rayonnera sur toutes vos photos.
+              </p>
+              <ul class="inclusions-list">
+                <li class="inclusion-item">
+                  <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  1 Séance d'essai de 2 heures incluse à domicile (Marrakech).
+                </li>
+                <li class="inclusion-item">
+                  <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Maquillage complet le Jour-J avec préparation cutanée de prestige.
+                </li>
+                <li class="inclusion-item">
+                  <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Pose de faux-cils individuels en soie naturelle haut de gamme.
+                </li>
+                <li class="inclusion-item">
+                  <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Kit de retouche mariée offert (rouge à lèvres, papiers matifiants).
+                </li>
+              </ul>
+            </div>
+            <div class="detail-price-box">
+              <span class="detail-price-title">Formule Complète</span>
+              <span class="detail-price-value">1800 DH</span>
+              <span class="detail-price-info">Essai + Maquillage Jour-J inclus</span>
+              <a href="index.html#reservation" class="btn btn-primary" style="width: 100%;">Réserver la formule</a>
+            </div>
+          </div>
+
+          <!-- Card 2: Fiancailles -->
+          <div class="service-detail-card reveal">
+            <div class="detail-content">
+              <span class="detail-tagline">Romantique & Lumineux</span>
+              <h3>Maquillage Fiançailles Prestige</h3>
+              <p class="detail-text">
+                Célébrez votre promesse d'amour avec élégance. Une mise en beauté fraîche et intensément glowy pour vous assurer d'être éblouissante sous toutes les lumières de votre réception de fiançailles à Marrakech.
+              </p>
+              <ul class="inclusions-list">
+                <li class="inclusion-item">
+                  <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Teint lumineux longue tenue résistant à la chaleur.
+                </li>
+                <li class="inclusion-item">
+                  <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Maquillage des yeux délicat assorti à vos bijoux et votre caftan.
+                </li>
+                <li class="inclusion-item">
+                  <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Pose de faux-cils effet naturel 3D.
+                </li>
+              </ul>
+            </div>
+            <div class="detail-price-box">
+              <span class="detail-price-title">Prestation Unique</span>
+              <span class="detail-price-value">1100 DH</span>
+              <span class="detail-price-info">Déplacement inclus à Marrakech</span>
+              <a href="index.html#reservation" class="btn btn-primary" style="width: 100%;">Réserver</a>
+            </div>
+          </div>
+
+          <!-- Card 3: Soirée / Gala -->
+          <div class="service-detail-card reveal">
+            <div class="detail-content">
+              <span class="detail-tagline">Sophistiqué & Intense</span>
+              <h3>Maquillage Soirée & Réception</h3>
+              <p class="detail-text">
+                Pour vos soirées mondaines, vos dîners de prestige ou vos anniversaires, optez pour un maquillage sophistiqué. Smoky-eyes magnétique rose gold ou cut-crease audacieux avec une bouche parfaitement dessinée.
+              </p>
+              <ul class="inclusions-list">
+                <li class="inclusion-item">
+                  <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Maquillage des yeux travaillé (paillettes fines, liner parfait).
+                </li>
+                <li class="inclusion-item">
+                  <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Contouring sculpté et teint impeccable waterproof.
+                </li>
+                <li class="inclusion-item">
+                  <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Pose de faux-cils d'effet volumineux ou papillon inclus.
+                </li>
+              </ul>
+            </div>
+            <div class="detail-price-box">
+              <span class="detail-price-title">Prestation Unique</span>
+              <span class="detail-price-value">850 DH</span>
+              <span class="detail-price-info">Déplacement inclus à Marrakech</span>
+              <a href="index.html#reservation" class="btn btn-primary" style="width: 100%;">Réserver</a>
+            </div>
+          </div>
+
+          <!-- Card 4: Invitée -->
+          <div class="service-detail-card reveal">
+            <div class="detail-content">
+              <span class="detail-tagline">Élégant & Naturel</span>
+              <h3>Maquillage Invitée Prestige</h3>
+              <p class="detail-text">
+                Accompagnez vos proches avec une classe sans faille. Un maquillage élégant et harmonieux s'associant à votre tenue. Teint frais, textures légères et fards à paupières naturels.
+              </p>
+              <ul class="inclusions-list">
+                <li class="inclusion-item">
+                  <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Préparation cutanée rapide et teint naturel frais.
+                </li>
+                <li class="inclusion-item">
+                  <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Maquillage des yeux doux (tons pastels, bronze ou champagne).
+                </li>
+                <li class="inclusion-item">
+                  <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Pose de mascara haute définition ou faux-cils légers.
+                </li>
+              </ul>
+            </div>
+            <div class="detail-price-box">
+              <span class="detail-price-title">Prestation Unique</span>
+              <span class="detail-price-value">750 DH</span>
+              <span class="detail-price-info">Déplacement inclus à Marrakech</span>
+              <a href="index.html#reservation" class="btn btn-primary" style="width: 100%;">Réserver</a>
+            </div>
+          </div>
+
+          <!-- Card 5: Shooting -->
+          <div class="service-detail-card reveal">
+            <div class="detail-content">
+              <span class="detail-tagline">Spécial Haute Définition</span>
+              <h3>Maquillage Shooting & Éditorial</h3>
+              <p class="detail-text">
+                Mise en beauté professionnelle adaptée aux contraintes de la photographie numérique et argentique. Parfait pour les shootings de mode dans le désert d'Agafay ou au Riad, et les séances de pré-mariage.
+              </p>
+              <ul class="inclusions-list">
+                <li class="inclusion-item">
+                  <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Maquillage structuré avec correction chromatique pro (HD).
+                </li>
+                <li class="inclusion-item">
+                  <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Teint matifié à l'épreuve de la sueur, du vent et de la poussière.
+                </li>
+                <li class="inclusion-item">
+                  <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Retouches régulières possibles sur le lieu du shooting (sur devis).
+                </li>
+              </ul>
+            </div>
+            <div class="detail-price-box">
+              <span class="detail-price-title">Par Séance</span>
+              <span class="detail-price-value">950 DH</span>
+              <span class="detail-price-info">Déplacement inclus à Marrakech</span>
+              <a href="index.html#reservation" class="btn btn-primary" style="width: 100%;">Réserver</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         FAQ INTERACTIVE ACCORDION
+         ======================================================================== -->
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-title-wrap reveal">
+          <span class="script-accent">Foire Aux Questions</span>
+          <h2 class="section-title">Des réponses à vos questions</h2>
+          <p class="section-subtitle">Toutes les informations pratiques</p>
+        </div>
+        
+        <div class="faq-container">
+          <!-- FAQ 1 -->
+          <div class="faq-card reveal">
+            <div class="faq-header">
+              <h4 class="faq-question">Comment réserver ma prestation à Marrakech ?</h4>
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+            <p class="faq-answer">
+              Pour réserver, il vous suffit de remplir le formulaire sur notre page d'accueil ou de cliquer sur le bouton WhatsApp pour nous contacter directement. Nous étudierons vos disponibilités et bloquerons votre date après versement d'un petit acompte de réservation.
+            </p>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="faq-card reveal">
+            <div class="faq-header">
+              <h4 class="faq-question">Quelles sont vos zones de déplacement gratuit ?</h4>
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+            <p class="faq-answer">
+              Je me déplace gratuitement dans tout Marrakech, y compris dans les quartiers de Gueliz, de l'Hivernage, de la Palmeraie, de la Route de l'Ourika et de la Route de Casablanca. Pour des déplacements plus lointains comme le Désert d'Agafay ou l'Ourika Montagneux, des frais kilométriques très légers s'appliquent.
+            </p>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="faq-card reveal">
+            <div class="faq-header">
+              <h4 class="faq-question">Quels cosmétiques utilisez-vous pour le teint ?</h4>
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+            <p class="faq-answer">
+              Je travaille exclusivement avec des produits de maquillage haut de gamme de grandes marques sélectives : Charlotte Tilbury (Flawless Filter), MAC Cosmetics (Studio Fix), Dior Backstage, Chanel et des palettes Natasha Denona. Ces produits garantissent un fini naturel et une résistance incomparable au climat chaud de Marrakech.
+            </p>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="faq-card reveal">
+            <div class="faq-header">
+              <h4 class="faq-question">Proposez-vous des tarifs de groupe pour les invitées ?</h4>
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+            <p class="faq-answer">
+              Oui, tout à fait ! Pour les mariages et grands événements, je propose des tarifs de groupe très avantageux à partir de 3 invitées supplémentaires en plus de la mariée. N'hésitez pas à mentionner le nombre de personnes à maquiller lors de votre demande de réservation afin d'obtenir un devis personnalisé.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       FOOTER
+       ======================================================================== -->
+  <footer class="footer">
+    <div class="container footer-top">
+      <div class="footer-brand">
+        <img src="assets/logo-clean.png" alt="Sarahglam's Marrakech" class="footer-logo">
+        <span class="footer-brand-title">Sarahglam's</span>
+        <span class="footer-brand-tagline">Maquillage à Domicile Marrakech</span>
+      </div>
+
+      <div class="footer-links">
+        <h4>Navigation</h4>
+        <ul class="footer-nav">
+          <li><a href="index.html#accueil">Accueil</a></li>
+          <li><a href="index.html#a-propos">À Propos</a></li>
+          <li><a href="services.html">Services & Tarifs</a></li>
+          <li><a href="index.html#galerie">Galerie</a></li>
+          <li><a href="index.html#temoignages">Témoignages</a></li>
+          <li><a href="index.html#reservation">Réservation</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-contact">
+        <h4>Contact Direct</h4>
+        <ul class="footer-contact-list">
+          <li><strong>WhatsApp :</strong> +212 6 12 34 56 78</li>
+          <li><strong>E-mail :</strong> contact@sarahglams.com</li>
+          <li><strong>Adresse :</strong> Gueliz, Marrakech, Maroc</li>
+          <li><strong>Secteur :</strong> Gueliz, Hivernage, Palmeraie, Route de l'Ourika & Agafay</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Sarahglam's Marrakech. Tous droits réservés.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Mentions Légales</a>
+        <a href="#">Politique de Confidentialité</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Core Scripts -->
+  <script src="js/main.js"></script>
+  
+  <script>
+    // FAQ Accordion Click Handler Integration
+    document.querySelectorAll('.faq-card').forEach(card => {
+      card.addEventListener('click', () => {
+        // Toggle active class on card
+        const isActive = card.classList.contains('active');
+        
+        // Close other active cards
+        document.querySelectorAll('.faq-card').forEach(otherCard => {
+          otherCard.classList.remove('active');
+        });
+        
+        if (!isActive) {
+          card.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
