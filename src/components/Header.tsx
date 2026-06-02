@@ -71,7 +71,7 @@ export default function Header() {
               className="logo-img"
               width={225}
               height={90}
-              style={{ objectFit: "contain", height: "auto" }}
+              style={{ objectFit: "contain" }}
             />
           </Link>
           

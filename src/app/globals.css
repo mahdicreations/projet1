@@ -309,13 +309,13 @@ h4 {
 }
 
 .logo-img {
-  height: 90px;
+  height: 90px !important;
   width: auto;
   transition: var(--transition-normal);
 }
 
 .header.scrolled .logo-img {
-  height: 70px;
+  height: 70px !important;
 }
 
 .nav-menu {
@@ -1890,7 +1890,7 @@ textarea.form-input {
   }
 
   .logo-img {
-    height: 80px; /* Mobile logo: exactly 80px as requested */
+    height: 80px !important; /* Mobile logo: exactly 80px, forced */
   }
 
   /* Position the language flag switcher at the far left of the mobile header */
