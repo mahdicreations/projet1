@@ -1822,3 +1822,39 @@ textarea.form-input {
     height: 100%;
   }
 }
+
+/* ========================================================================
+   MOBILE NAVIGATION HEADER PREMIUM UPGRADES (CENTER LOGO + ENSURE BURGER SHOWS)
+   ======================================================================== */
+@media (max-width: 991px) {
+  .nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    min-height: 70px;
+  }
+
+  .logo-wrap {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1002;
+  }
+
+  .logo-img {
+    height: 52px; /* Sizing fit for mobile */
+  }
+
+  .burger-menu {
+    position: absolute;
+    right: 1.5rem;
+    display: flex !important; /* Force visible on mobile */
+    z-index: 1005;
+  }
+  
+  .burger-line {
+    background-color: var(--color-dark) !important; /* Ensure visibility */
+  }
+}
