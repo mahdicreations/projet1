@@ -1880,7 +1880,7 @@ textarea.form-input {
 
   .burger-menu {
     position: absolute;
-    right: 1.5rem !important; /* Force right positioning */
+    right: 2.2rem !important; /* Shifted slightly to the left to prevent edge crowding */
     display: flex !important; /* Force visible on mobile */
     z-index: 1005;
   }
