@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -64,7 +65,14 @@ export default function Header() {
       <header className={`header ${isScrolled ? "scrolled" : ""}`}>
         <div className="container nav-container">
           <Link href="/#accueil" className="logo-wrap" aria-label="Sarahglam's Marrakech Accueil" onClick={closeMenu}>
-            <img src="/assets/logo-clean.png" alt="Sarahglam's Logo" className="logo-img" />
+            <Image
+              src="/assets/logo-clean.png"
+              alt="Sarahglam's Logo"
+              className="logo-img"
+              width={120}
+              height={50}
+              style={{ objectFit: "contain", height: "auto" }}
+            />
           </Link>
           
           {/* Desktop Navigation Menu */}

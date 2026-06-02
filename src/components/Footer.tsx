@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
 
 export default function Footer() {
@@ -11,7 +12,14 @@ export default function Footer() {
     <footer className="footer">
       <div className="container footer-top">
         <div className="footer-brand">
-          <img src="/assets/logo-clean.png" alt="Sarahglam's Marrakech" className="footer-logo" />
+          <Image
+            src="/assets/logo-clean.png"
+            alt="Sarahglam's Marrakech"
+            className="footer-logo"
+            width={100}
+            height={42}
+            style={{ objectFit: "contain", height: "auto" }}
+          />
           <span className="footer-brand-title">Sarahglam's</span>
           <span className="footer-brand-tagline">{t("footer.brand.tagline")}</span>
         </div>

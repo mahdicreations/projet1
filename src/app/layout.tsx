@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Montserrat, Cormorant_Garamond, Alex_Brush } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
@@ -9,18 +9,21 @@ const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-sans",
+  display: "swap", // Prevent render-blocking FOIT
 });
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-serif",
+  display: "swap", // Prevent render-blocking FOIT
 });
 
 const alexBrush = Alex_Brush({
   subsets: ["latin"],
   weight: ["400"],
   variable: "--font-script",
+  display: "swap", // Prevent render-blocking FOIT
 });
 
 export const metadata: Metadata = {
@@ -53,6 +56,18 @@ export const metadata: Metadata = {
   icons: {
     icon: "/assets/logo-clean.png",
   },
+};
+
+// Proper viewport configuration for mobile — affects CLS and mobile scoring
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f9f4ef" },
+    { media: "(prefers-color-scheme: dark)", color: "#1a0a00" },
+  ],
 };
 
 export default function RootLayout({

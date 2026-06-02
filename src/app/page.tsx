@@ -2,8 +2,15 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import RevealOnScroll from "@/components/RevealOnScroll";
+import Image from "next/image";
+import dynamic from "next/dynamic";
 import { useLanguage } from "@/context/LanguageContext";
+
+// Lazy-load below-the-fold heavy component
+const RevealOnScroll = dynamic(() => import("@/components/RevealOnScroll"), {
+  ssr: false,
+  loading: () => <div style={{ minHeight: "2px" }} />,
+});
 
 // Gallery Items definition
 const GALLERY_ITEMS = [
@@ -160,11 +167,12 @@ export default function Home() {
   return (
     <main>
       {/* ========================================================================
-           HERO SECTION
+           HERO SECTION — Above-the-fold: no RevealOnScroll wrapper (avoids hiding LCP)
            ======================================================================== */}
       <section id="accueil" className="hero watermark-bg">
         <div className="container hero-grid">
-          <RevealOnScroll className="hero-content">
+          {/* Hero content: rendered directly, no lazy observer delay */}
+          <div className="hero-content reveal active">
             <span className="hero-tagline">{t("hero.tagline")}</span>
             <h1 className="hero-title">
               {t("hero.title")} <span>{t("hero.title_span")}</span>
@@ -178,16 +186,21 @@ export default function Home() {
                 {t("hero.cta_secondary")}
               </Link>
             </div>
-          </RevealOnScroll>
-          <RevealOnScroll className="hero-visual">
+          </div>
+          {/* Hero image: priority={true} = LCP preload, fetchpriority=high, no lazy */}
+          <div className="hero-visual reveal active">
             <div className="hero-img-frame">
-              <img
+              <Image
                 src="/assets/hero-makeup.png"
                 alt="Prestige bridal makeup in Marrakech by Sarahglam's"
+                width={600}
+                height={750}
+                priority={true}
+                style={{ objectFit: "cover", width: "100%", height: "auto" }}
               />
             </div>
             <div className="hero-deco-flower"></div>
-          </RevealOnScroll>
+          </div>
         </div>
       </section>
 
@@ -198,9 +211,12 @@ export default function Home() {
         <div className="container about-grid">
           <RevealOnScroll className="about-visual">
             <div className="about-img-frame">
-              <img
+              <Image
                 src="/assets/about-makeup.png"
                 alt="Luxurious makeup setup with rose gold accessories in Gueliz Marrakech"
+                width={550}
+                height={680}
+                style={{ objectFit: "cover", width: "100%", height: "auto" }}
               />
             </div>
             <div className="experience-badge">
@@ -359,7 +375,13 @@ export default function Home() {
                 className="gallery-item"
                 onClick={() => openLightbox(item)}
               >
-                <img src={item.src} alt={item.alt} />
+                <Image
+                  src={item.src}
+                  alt={item.alt}
+                  width={600}
+                  height={750}
+                  style={{ objectFit: "cover", width: "100%", height: "100%" }}
+                />
                 <div className="gallery-overlay">
                   <div className="gallery-info">
                     <span className="gallery-category">{t(item.categoryKey)}</span>
@@ -696,10 +718,13 @@ export default function Home() {
             >
               &times;
             </button>
-            <img
+            <Image
               className="lightbox-img"
               src={lightboxImage.src}
               alt={lightboxImage.alt}
+              width={900}
+              height={1100}
+              style={{ objectFit: "contain", width: "100%", height: "auto", maxHeight: "85vh" }}
             />
             <div className="lightbox-caption">
               {t(lightboxImage.categoryKey)} - {t(lightboxImage.titleKey)}
