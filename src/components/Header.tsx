@@ -69,8 +69,8 @@ export default function Header() {
               src="/assets/logo-clean.png"
               alt="Sarahglam's Logo"
               className="logo-img"
-              width={120}
-              height={50}
+              width={225}
+              height={90}
               style={{ objectFit: "contain", height: "auto" }}
             />
           </Link>
