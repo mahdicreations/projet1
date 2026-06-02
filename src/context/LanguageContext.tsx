@@ -3,13 +3,15 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import fr from "../locales/fr.json";
 import ar from "../locales/ar.json";
+import en from "../locales/en.json";
 
-type Locale = "fr" | "ar";
+type Locale = "fr" | "ar" | "en";
 type Translations = Record<string, string>;
 
 const dictionaries: Record<Locale, Translations> = {
   fr: fr as Translations,
   ar: ar as Translations,
+  en: en as Translations,
 };
 
 interface LanguageContextType {
@@ -27,7 +29,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   // Load locale from localStorage in client
   useEffect(() => {
     const savedLocale = localStorage.getItem("sarahglams_locale") as Locale;
-    if (savedLocale === "fr" || savedLocale === "ar") {
+    if (savedLocale === "fr" || savedLocale === "ar" || savedLocale === "en") {
       setLocaleState(savedLocale);
     }
   }, []);

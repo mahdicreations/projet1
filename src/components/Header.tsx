@@ -98,13 +98,33 @@ export default function Header() {
                   <rect x="2" width="1" height="2" fill="#ED2939"/>
                 </svg>
               </button>
+              
+              <button 
+                className={`lang-btn ${locale === "en" ? "active" : ""}`}
+                onClick={() => setLocale("en")}
+                title="English"
+                aria-label="Switch to English"
+              >
+                <svg className="flag-svg" viewBox="0 0 50 30" width="18" height="11">
+                  <rect width="50" height="30" fill="#012169"/>
+                  <path d="M0,0 L50,30 M0,30 L50,0" stroke="#fff" strokeWidth="6"/>
+                  <path d="M0,0 L50,30 M0,30 L50,0" stroke="#C8102E" strokeWidth="2"/>
+                  <path d="M25,0 L25,30 M0,15 L50,15" stroke="#fff" strokeWidth="10"/>
+                  <path d="M25,0 L25,30 M0,15 L50,15" stroke="#C8102E" strokeWidth="6"/>
+                </svg>
+              </button>
+
               <button 
                 className={`lang-btn ${locale === "ar" ? "active" : ""}`}
                 onClick={() => setLocale("ar")}
                 title="العربية"
                 aria-label="تغيير اللغة إلى العربية"
               >
-                <span className="arabic-letter">ع</span>
+                <svg className="flag-svg" viewBox="0 0 30 20" width="18" height="12">
+                  <rect width="30" height="20" fill="#006C35"/>
+                  <circle cx="15" cy="10" r="5" fill="none" stroke="#E5A93B" strokeWidth="0.8" strokeDasharray="1 0.8"/>
+                  <path d="M13,8 A3,3 0 1,0 17.5,12.5 A2.6,2.6 0 1,1 13,8" fill="#ffffff"/>
+                </svg>
               </button>
             </div>
 
@@ -162,11 +182,29 @@ export default function Header() {
             <span>Français</span>
           </button>
           <button 
+            className={`mobile-lang-btn ${locale === "en" ? "active" : ""}`}
+            onClick={() => { setLocale("en"); closeMenu(); }}
+            aria-label="Switch to English"
+          >
+            <svg className="flag-svg" viewBox="0 0 50 30" width="20" height="12">
+              <rect width="50" height="30" fill="#012169"/>
+              <path d="M0,0 L50,30 M0,30 L50,0" stroke="#fff" strokeWidth="6"/>
+              <path d="M0,0 L50,30 M0,30 L50,0" stroke="#C8102E" strokeWidth="2"/>
+              <path d="M25,0 L25,30 M0,15 L50,15" stroke="#fff" strokeWidth="10"/>
+              <path d="M25,0 L25,30 M0,15 L50,15" stroke="#C8102E" strokeWidth="6"/>
+            </svg>
+            <span>English</span>
+          </button>
+          <button 
             className={`mobile-lang-btn ${locale === "ar" ? "active" : ""}`}
             onClick={() => { setLocale("ar"); closeMenu(); }}
             aria-label="تغيير اللغة إلى العربية"
           >
-            <span className="arabic-letter">ع</span>
+            <svg className="flag-svg" viewBox="0 0 30 20" width="20" height="13">
+              <rect width="30" height="20" fill="#006C35"/>
+              <circle cx="15" cy="10" r="5" fill="none" stroke="#E5A93B" strokeWidth="0.8" strokeDasharray="1 0.8"/>
+              <path d="M13,8 A3,3 0 1,0 17.5,12.5 A2.6,2.6 0 1,1 13,8" fill="#ffffff"/>
+            </svg>
             <span>العربية</span>
           </button>
         </div>

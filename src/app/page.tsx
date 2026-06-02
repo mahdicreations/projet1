@@ -87,6 +87,20 @@ export default function Home() {
 
       text += `الرجاء تأكيد الحجز وإفادتي بالتواريخ المتاحة لمراكش! 💕`;
       return encodeURIComponent(text);
+    } else if (locale === "en") {
+      let text = `✨ *In-Home Makeup Booking Request Marrakech - Sarahglam's* ✨\n\n`;
+      text += `🌸 *Name:* ${formData.name}\n`;
+      text += `📞 *Phone:* ${formData.phone}\n`;
+      text += `📅 *Requested Date:* ${formData.date}\n`;
+      text += `📍 *Neighborhood / Riad or Hotel:* ${formData.city}\n`;
+      text += `💄 *Service Package:* ${formData.service}\n\n`;
+
+      if (formData.message.trim()) {
+        text += `💌 *Details / Special Requests:*\n_${formData.message.trim()}_\n\n`;
+      }
+
+      text += `Please confirm your availability for Marrakech! 💕`;
+      return encodeURIComponent(text);
     } else {
       let text = `✨ *Demande de Maquillage à Domicile Marrakech - Sarahglam's* ✨\n\n`;
       text += `🌸 *Nom :* ${formData.name}\n`;
@@ -109,7 +123,7 @@ export default function Home() {
     e.preventDefault();
 
     if (!formData.name || !formData.phone || !formData.date || !formData.city || !formData.service) {
-      alert(locale === "ar" ? "يرجى ملء جميع الحقول المطلوبة." : "Veuillez remplir tous les champs obligatoires.");
+      alert(locale === "ar" ? "يرجى ملء جميع الحقول المطلوبة." : locale === "en" ? "Please fill out all required fields." : "Veuillez remplir tous les champs obligatoires.");
       return;
     }
 
@@ -133,9 +147,12 @@ export default function Home() {
 
   // Direct WhatsApp Button click handler
   const handleDirectWhatsAppClick = () => {
-    const text = locale === "ar"
-      ? "مرحباً سارة غلامز! أود الحصول على معلومات حول خدمات المكياج المنزلي في مراكش. ✨"
-      : "Bonjour Sarahglam's ! Je souhaite obtenir des informations sur vos prestations de maquillage à domicile à Marrakech. ✨";
+    let text = "Bonjour Sarahglam's ! Je souhaite obtenir des informations sur vos prestations de maquillage à domicile à Marrakech. ✨";
+    if (locale === "ar") {
+      text = "مرحباً سارة غلامز! أود الحصول على معلومات حول خدمات المكياج المنزلي في مراكش. ✨";
+    } else if (locale === "en") {
+      text = "Hello Sarahglam's! I would like to get information about your in-home makeup services in Marrakech. ✨";
+    }
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
     window.open(whatsappUrl, "_blank");
   };
@@ -198,15 +215,11 @@ export default function Home() {
               {locale === "ar" ? (
                 <strong>{t("about.bio1")}</strong>
               ) : (
-                <>Bienvenue dans l&apos;univers exclusif de <strong>Sarahglam&apos;s</strong>, votre prestataire privilège pour le <strong>maquillage à domicile à Marrakech</strong>. En tant que makeup artist passionnée, je me déplace chez vous, dans votre riad ou dans les plus prestigieux hôtels de la ville pour sublimer votre éclat.</>
+                <>Welcome to the exclusive world of <strong>Sarahglam&apos;s</strong>, {t("about.bio1").replace("Welcome to the exclusive world of Sarahglam's, ", "")}</>
               )}
             </p>
             <p className="about-bio">
-              {locale === "ar" ? (
-                t("about.bio2")
-              ) : (
-                <>Spécialisée dans les mariages de destination à Marrakech et les événements haut de gamme, je crée des looks soft-glam et romantiques adaptés à vos envies. J&apos;utilise uniquement des produits iconiques <em>(Charlotte Tilbury, MAC, Dior, Chanel, Natasha Denona)</em> formulés pour résister à la douce chaleur marrakchia et durer parfaitement toute la nuit.</>
-              )}
+              {t("about.bio2")}
             </p>
 
             <div className="about-features">
@@ -547,7 +560,7 @@ export default function Home() {
                 >
                   <option value="" disabled>{t("booking.form.service_default")}</option>
                   <option value="Maquillage Mariée (Essai + Jour J)">{t("booking.form.service_opt1")}</option>
-                  <option value="Maquillage Fianiailles">{t("booking.form.service_opt2")}</option>
+                  <option value="Maquillage Fiançailles">{t("booking.form.service_opt2")}</option>
                   <option value="Maquillage Soirée">{t("booking.form.service_opt3")}</option>
                   <option value="Maquillage Invitée">{t("booking.form.service_opt4")}</option>
                   <option value="Maquillage Shooting">{t("booking.form.service_opt5")}</option>
