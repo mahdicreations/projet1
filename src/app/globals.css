@@ -1889,3 +1889,188 @@ textarea.form-input {
     background-color: var(--color-dark) !important; /* Ensure visibility */
   }
 }
+
+/* ========================================================================
+   INTERNATIONALIZATION (i18n) & LANGUAGE SWITCHER STYLES
+   ======================================================================== */
+.nav-cta-group {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-right: 1px solid rgba(183, 110, 121, 0.2);
+  padding-right: 1.2rem;
+}
+
+.lang-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  cursor: pointer;
+  background: transparent;
+  transition: all var(--transition-fast);
+  padding: 0;
+}
+
+.lang-btn:hover {
+  border-color: var(--color-primary-light);
+  background: rgba(183, 110, 121, 0.05);
+}
+
+.lang-btn.active {
+  border-color: var(--color-primary);
+  background: rgba(183, 110, 121, 0.1);
+  box-shadow: 0 4px 10px rgba(183, 110, 121, 0.1);
+}
+
+.flag-svg {
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.arabic-letter {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+/* Mobile Language Switcher */
+.mobile-lang-switcher {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  padding: 1rem 0;
+  border-top: 1px solid rgba(183, 110, 121, 0.1);
+  border-bottom: 1px solid rgba(183, 110, 121, 0.1);
+}
+
+.mobile-lang-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius-sm);
+  border: 1px solid rgba(183, 110, 121, 0.15);
+  background: var(--color-white);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-dark);
+  transition: all var(--transition-fast);
+}
+
+.mobile-lang-btn.active {
+  background: var(--color-blush);
+  border-color: var(--color-primary);
+  color: var(--color-primary-dark);
+}
+
+.mobile-lang-btn svg {
+  display: block;
+}
+
+/* ========================================================================
+   RIGHT-TO-LEFT (RTL) LAYOUT & DIRECTION OVERRIDES
+   ======================================================================== */
+html[dir="rtl"] {
+  text-align: right;
+}
+
+html[dir="rtl"] body {
+  /* Prevent word clipping for cursive Arabic characters */
+  text-rendering: optimizeLegibility;
+}
+
+/* RTL Typography fallbacks for premium rendering */
+html[dir="rtl"] h1,
+html[dir="rtl"] h2,
+html[dir="rtl"] h3,
+html[dir="rtl"] h4,
+html[dir="rtl"] .script-accent {
+  font-family: var(--font-sans), sans-serif;
+  letter-spacing: 0;
+}
+
+html[dir="rtl"] .hero-content,
+html[dir="rtl"] .about-content,
+html[dir="rtl"] .booking-info,
+html[dir="rtl"] .footer-links,
+html[dir="rtl"] .footer-contact {
+  text-align: right;
+}
+
+html[dir="rtl"] .about-features,
+html[dir="rtl"] .feature-text {
+  text-align: right;
+}
+
+/* Switch borders & spacing */
+html[dir="rtl"] .lang-switcher {
+  border-right: none;
+  border-left: 1px solid rgba(183, 110, 121, 0.2);
+  padding-right: 0;
+  padding-left: 1.2rem;
+}
+
+/* Swapping absolutely positioned elements in RTL */
+html[dir="rtl"] .experience-badge {
+  left: auto;
+  right: -25px;
+}
+
+@media (max-width: 767px) {
+  html[dir="rtl"] .experience-badge {
+    right: 50%;
+    transform: translateX(50%);
+  }
+}
+
+html[dir="rtl"] .service-detail-card::before {
+  left: auto;
+  right: 0;
+}
+
+/* Reverse mobile side drawer animation direction in RTL */
+html[dir="rtl"] .mobile-nav {
+  right: auto;
+  left: -100%;
+  box-shadow: 10px 0 30px rgba(0, 0, 0, 0.05);
+  transition: left var(--transition-normal);
+}
+
+html[dir="rtl"] .mobile-nav.open {
+  right: auto;
+  left: 0;
+}
+
+/* Flip hamburger menu position in RTL header on mobile */
+@media (max-width: 991px) {
+  html[dir="rtl"] .burger-menu {
+    right: auto !important;
+    left: 2.2rem !important;
+  }
+}
+
+/* Flip accordions icons direction in RTL */
+html[dir="rtl"] .faq-header {
+  flex-direction: row-reverse;
+}
+
+/* Form controls padding flip */
+html[dir="rtl"] select.form-input {
+  background-position: left 1.2rem center;
+  padding-left: 3rem;
+  padding-right: 1.2rem;
+}

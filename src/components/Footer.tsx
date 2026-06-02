@@ -1,44 +1,49 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Footer() {
+  const { t } = useLanguage();
+
   return (
     <footer className="footer">
       <div className="container footer-top">
         <div className="footer-brand">
           <img src="/assets/logo-clean.png" alt="Sarahglam's Marrakech" className="footer-logo" />
           <span className="footer-brand-title">Sarahglam's</span>
-          <span className="footer-brand-tagline">Maquillage à Domicile Marrakech</span>
+          <span className="footer-brand-tagline">{t("footer.brand.tagline")}</span>
         </div>
 
         <div className="footer-links">
-          <h4>Navigation</h4>
+          <h4>{t("footer.nav_title")}</h4>
           <ul className="footer-nav">
-            <li><Link href="/#accueil">Accueil</Link></li>
-            <li><Link href="/#a-propos">À Propos</Link></li>
-            <li><Link href="/services">Services & Tarifs</Link></li>
-            <li><Link href="/#galerie">Galerie</Link></li>
-            <li><Link href="/#temoignages">Témoignages</Link></li>
-            <li><Link href="/#reservation">Réservation</Link></li>
+            <li><Link href="/#accueil">{t("nav.home")}</Link></li>
+            <li><Link href="/#a-propos">{t("nav.about")}</Link></li>
+            <li><Link href="/services">{t("nav.services")}</Link></li>
+            <li><Link href="/#galerie">{t("nav.gallery")}</Link></li>
+            <li><Link href="/#temoignages">{t("nav.testimonials")}</Link></li>
+            <li><Link href="/#reservation">{t("nav.booking")}</Link></li>
           </ul>
         </div>
 
         <div className="footer-contact">
-          <h4>Contact Direct</h4>
+          <h4>{t("footer.contact_title")}</h4>
           <ul className="footer-contact-list">
-            <li><strong>WhatsApp :</strong> +212 6 12 34 56 78</li>
-            <li><strong>E-mail :</strong> contact@sarahglams.com</li>
-            <li><strong>Adresse :</strong> Gueliz, Marrakech, Maroc</li>
-            <li><strong>Secteur :</strong> Gueliz, Hivernage, Palmeraie, Route de l'Ourika & Agafay</li>
+            <li><strong>{t("footer.contact.whatsapp")}</strong> +212 6 12 34 56 78</li>
+            <li><strong>{t("footer.contact.email")}</strong> contact@sarahglams.com</li>
+            <li><strong>{t("footer.contact.address")}</strong> {t("booking.address_text")}</li>
+            <li><strong>{t("footer.contact.sector")}</strong> {t("footer.contact.sector_val")}</li>
           </ul>
         </div>
       </div>
 
       <div className="container footer-bottom">
-        <p>&copy; {new Date().getFullYear()} Sarahglam&apos;s Marrakech. Tous droits réservés.</p>
+        <p>&copy; {new Date().getFullYear()} Sarahglam&apos;s Marrakech. {t("footer.copy")}</p>
         <div className="footer-bottom-links">
-          <Link href="#">Mentions Légales</Link>
-          <Link href="#">Politique de Confidentialité</Link>
+          <Link href="#">{t("footer.bottom.legal")}</Link>
+          <Link href="#">{t("footer.bottom.privacy")}</Link>
         </div>
       </div>
     </footer>

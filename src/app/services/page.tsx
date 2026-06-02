@@ -3,98 +3,11 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import RevealOnScroll from "@/components/RevealOnScroll";
-
-// Services Data definition
-const SERVICES_DATA = [
-  {
-    id: "mariee",
-    tagline: "Le plus prestigieux",
-    title: "Maquillage Mariée Royale",
-    desc: "Pour le jour le plus inoubliable de votre vie, profitez d'une mise en beauté majestueuse. J'étudie votre type de peau, vos préférences et votre style pour concevoir un maquillage nuptial intemporel et résistant qui rayonnera sur toutes vos photos.",
-    inclusions: [
-      "1 Séance d'essai de 2 heures incluse à domicile (Marrakech).",
-      "Maquillage complet le Jour-J avec préparation cutanée de prestige.",
-      "Pose de faux-cils individuels en soie naturelle haut de gamme.",
-      "Kit de retouche mariée offert (rouge à lèvres, papiers matifiants).",
-    ],
-    price: "1800 DH",
-    priceInfo: "Essai + Maquillage Jour-J inclus",
-  },
-  {
-    id: "fiancailles",
-    tagline: "Romantique & Lumineux",
-    title: "Maquillage Fiançailles Prestige",
-    desc: "Célébrez votre promesse d'amour avec élégance. Une mise en beauté fraîche et intensément glowy pour vous assurer d'être éblouissante sous toutes les lumières de votre réception de fiançailles à Marrakech.",
-    inclusions: [
-      "Teint lumineux longue tenue résistant à la chaleur.",
-      "Maquillage des yeux délicat assorti à vos caftans et bijoux.",
-      "Pose de faux-cils effet naturel 3D.",
-    ],
-    price: "1100 DH",
-    priceInfo: "Déplacement inclus à Marrakech",
-  },
-  {
-    id: "soiree",
-    tagline: "Sophistiqué & Intense",
-    title: "Maquillage Soirée & Réception",
-    desc: "Pour vos soirées mondaines, vos dîners de prestige ou vos anniversaires, optez pour un maquillage sophistiqué. Smoky-eyes magnétique rose gold ou cut-crease audacieux avec une bouche parfaitement dessinée.",
-    inclusions: [
-      "Maquillage des yeux travaillé (paillettes fines, liner parfait).",
-      "Contouring sculpté et teint impeccable waterproof.",
-      "Pose de faux-cils d'effet volumineux ou papillon inclus.",
-    ],
-    price: "850 DH",
-    priceInfo: "Déplacement inclus à Marrakech",
-  },
-  {
-    id: "invitee",
-    tagline: "Élégant & Naturel",
-    title: "Maquillage Invitée Prestige",
-    desc: "Accompagnez vos proches avec une classe sans faille. Un maquillage élégant et harmonieux s'associant à votre tenue. Teint frais, textures légères et fards à paupières naturels.",
-    inclusions: [
-      "Préparation cutanée rapide et teint naturel frais.",
-      "Maquillage des yeux doux (tons pastels, bronze ou champagne).",
-      "Pose de mascara haute définition ou faux-cils légers.",
-    ],
-    price: "750 DH",
-    priceInfo: "Déplacement inclus à Marrakech",
-  },
-  {
-    id: "shooting",
-    tagline: "Spécial Haute Définition",
-    title: "Maquillage Shooting & Éditorial",
-    desc: "Mise en beauté professionnelle adaptée aux contraintes de la photographie numérique et argentique. Parfait pour les shootings de mode dans le désert d'Agafay ou au Riad, et les séances de pré-mariage.",
-    inclusions: [
-      "Maquillage structuré avec correction chromatique pro (HD).",
-      "Teint matifié à l'épreuve de la sueur, du vent et de la poussière.",
-      "Retouches régulières possibles sur le lieu du shooting (sur devis).",
-    ],
-    price: "950 DH",
-    priceInfo: "Déplacement inclus à Marrakech",
-  },
-];
-
-// FAQ Data definition
-const FAQ_DATA = [
-  {
-    question: "Comment réserver ma prestation à Marrakech ?",
-    answer: "Pour réserver, il vous suffit de remplir le formulaire sur notre page d'accueil ou de cliquer sur le bouton WhatsApp pour nous contacter directement. Nous étudierons vos disponibilités et bloquerons votre date après versement d'un petit acompte de réservation.",
-  },
-  {
-    question: "Quelles sont vos zones de déplacement gratuit ?",
-    answer: "Je me déplace gratuitement dans tout Marrakech, y compris dans les quartiers de Gueliz, de l'Hivernage, de la Palmeraie, de la Route de l'Ourika et de la Route de Casablanca. Pour des déplacements plus lointains comme le Désert d'Agafay ou l'Ourika Montagneux, des frais kilométriques très légers s'appliquent.",
-  },
-  {
-    question: "Quels cosmétiques utilisez-vous pour le teint ?",
-    answer: "Je travaille exclusivement avec des produits de maquillage haut de gamme de grandes marques sélectives : Charlotte Tilbury (Flawless Filter), MAC Cosmetics (Studio Fix), Dior Backstage, Chanel et des palettes Natasha Denona. Ces produits garantissent un fini naturel et une résistance incomparable au climat chaud de Marrakech.",
-  },
-  {
-    question: "Proposez-vous des tarifs de groupe pour les invitées ?",
-    answer: "Oui, tout à fait ! Pour les mariages et grands événements, je propose des tarifs de groupe très avantageux à partir de 3 invitées supplémentaires en plus de la mariée. N'hésitez pas à mentionner le nombre de personnes à maquiller lors de votre demande de réservation afin d'obtenir un devis personnalisé.",
-  },
-];
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Services() {
+  const { t } = useLanguage();
+
   // FAQ Active Index State
   const [activeFaqIndex, setActiveFaqIndex] = useState<number | null>(null);
 
@@ -107,6 +20,94 @@ export default function Services() {
     }
   };
 
+  const services = [
+    {
+      id: "mariee",
+      tagline: t("services.detail.tagline.royal"),
+      title: t("services.detail.mariee.title"),
+      desc: t("services.detail.mariee.desc"),
+      inclusions: [
+        t("services.detail.mariee.inc1"),
+        t("services.detail.mariee.inc2"),
+        t("services.detail.mariee.inc3"),
+        t("services.detail.mariee.inc4"),
+      ],
+      price: "1800 DH",
+      priceInfo: t("services.detail.mariee.priceInfo"),
+    },
+    {
+      id: "fiancailles",
+      tagline: t("services.detail.tagline.romantique"),
+      title: t("services.detail.fiancailles.title"),
+      desc: t("services.detail.fiancailles.desc"),
+      inclusions: [
+        t("services.detail.fiancailles.inc1"),
+        t("services.detail.fiancailles.inc2"),
+        t("services.detail.fiancailles.inc3"),
+      ],
+      price: "1100 DH",
+      priceInfo: t("services.detail.fiancailles.priceInfo"),
+    },
+    {
+      id: "soiree",
+      tagline: t("services.detail.tagline.soiree"),
+      title: t("services.detail.soiree.title"),
+      desc: t("services.detail.soiree.desc"),
+      inclusions: [
+        t("services.detail.soiree.inc1"),
+        t("services.detail.soiree.inc2"),
+        t("services.detail.soiree.inc3"),
+      ],
+      price: "850 DH",
+      priceInfo: t("services.detail.soiree.priceInfo"),
+    },
+    {
+      id: "invitee",
+      tagline: t("services.detail.tagline.invitee"),
+      title: t("services.detail.invitee.title"),
+      desc: t("services.detail.invitee.desc"),
+      inclusions: [
+        t("services.detail.invitee.inc1"),
+        t("services.detail.invitee.inc2"),
+        t("services.detail.invitee.inc3"),
+      ],
+      price: "750 DH",
+      priceInfo: t("services.detail.invitee.priceInfo"),
+    },
+    {
+      id: "shooting",
+      tagline: t("services.detail.tagline.shooting"),
+      title: t("services.detail.shooting.title"),
+      desc: t("services.detail.shooting.desc"),
+      inclusions: [
+        t("services.detail.shooting.inc1"),
+        t("services.detail.shooting.inc2"),
+        t("services.detail.shooting.inc3"),
+      ],
+      price: "950 DH",
+      priceInfo: t("services.detail.shooting.priceInfo"),
+    },
+  ];
+
+  const faqs = [
+    {
+      question: t("services.faq.q1"),
+      answer: t("services.faq.a1"),
+    },
+    {
+      question: t("services.faq.q2"),
+      answer: t("services.faq.a2"),
+    },
+    {
+      question: t("services.faq.q3"),
+      answer: t("services.faq.a3"),
+    },
+    {
+      question: t("services.faq.q4"),
+      answer: t("services.faq.a4"),
+    },
+  ];
+
   return (
     <main>
       {/* ========================================================================
@@ -115,12 +116,12 @@ export default function Services() {
       <section className="services-hero watermark-bg">
         <div className="container">
           <RevealOnScroll className="reveal active">
-            <span className="script-accent">Tarifs & Prestations</span>
+            <span className="script-accent">{t("services.hero.tagline")}</span>
             <h1 className="hero-title" style={{ fontSize: "3rem", marginBottom: "1rem" }}>
-              Carte des Services à Marrakech
+              {t("services.hero.title")}
             </h1>
             <p className="hero-desc" style={{ maxWidth: "600px" }}>
-              Des formules sur-mesure haut de gamme pour sublimer votre beauté naturelle lors de vos événements d&apos;exception à Marrakech.
+              {t("services.hero.desc")}
             </p>
           </RevealOnScroll>
         </div>
@@ -132,7 +133,7 @@ export default function Services() {
       <section className="services-detail-section">
         <div className="container">
           <div className="service-detail-grid">
-            {SERVICES_DATA.map((service) => (
+            {services.map((service) => (
               <RevealOnScroll key={service.id} className="service-detail-card">
                 <div className="detail-content">
                   <span className="detail-tagline">{service.tagline}</span>
@@ -150,11 +151,11 @@ export default function Services() {
                   </ul>
                 </div>
                 <div className="detail-price-box">
-                  <span className="detail-price-title">Prestation</span>
+                  <span className="detail-price-title">{t("services.detail.price_label")}</span>
                   <span className="detail-price-value">{service.price}</span>
                   <span className="detail-price-info">{service.priceInfo}</span>
                   <Link href="/#reservation" className="btn btn-primary" style={{ width: "100%" }}>
-                    Réserver
+                    {t("nav.cta")}
                   </Link>
                 </div>
               </RevealOnScroll>
@@ -169,13 +170,13 @@ export default function Services() {
       <section className="faq-section">
         <div className="container">
           <RevealOnScroll className="section-title-wrap">
-            <span className="script-accent">Foire Aux Questions</span>
-            <h2 className="section-title">Des réponses à vos questions</h2>
-            <p className="section-subtitle">Toutes les informations pratiques</p>
+            <span className="script-accent">{t("services.faq.tagline")}</span>
+            <h2 className="section-title">{t("services.faq.title")}</h2>
+            <p className="section-subtitle">{t("services.faq.subtitle")}</p>
           </RevealOnScroll>
 
           <div className="faq-container">
-            {FAQ_DATA.map((faq, index) => {
+            {faqs.map((faq, index) => {
               const isActive = activeFaqIndex === index;
               return (
                 <RevealOnScroll

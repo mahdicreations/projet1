@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import RevealOnScroll from "@/components/RevealOnScroll";
+import { useLanguage } from "@/context/LanguageContext";
 
 // Gallery Items definition
 const GALLERY_ITEMS = [
@@ -10,26 +11,28 @@ const GALLERY_ITEMS = [
     id: 1,
     src: "/assets/gallery-bridal.png",
     alt: "Sophisticated Marrakech bridal soft glam look",
-    category: "Mariage",
-    title: "Douceur Nuptiale",
+    categoryKey: "gallery.category.mariage",
+    titleKey: "gallery.title1",
   },
   {
     id: 2,
     src: "/assets/gallery-glam.png",
     alt: "Prestige evening makeup in Marrakech by Sarahglam's",
-    category: "Glam Soirée",
-    title: "Regard Braise & Rose Gold",
+    categoryKey: "gallery.category.glam",
+    titleKey: "gallery.title2",
   },
   {
     id: 3,
     src: "/assets/hero-makeup.png",
     alt: "Engagement glow makeup Marrakech",
-    category: "Fiançailles",
-    title: "Éclat Romantique",
+    categoryKey: "gallery.category.fiancailles",
+    titleKey: "gallery.title3",
   },
 ];
 
 export default function Home() {
+  const { locale, t } = useLanguage();
+
   // Lightbox State
   const [lightboxImage, setLightboxImage] = useState<typeof GALLERY_ITEMS[0] | null>(null);
 
@@ -70,19 +73,35 @@ export default function Home() {
 
   // Generate WhatsApp Message Link
   const generateWhatsAppMessage = () => {
-    let text = `✨ *Demande de Maquillage à Domicile Marrakech - Sarahglam's* ✨\n\n`;
-    text += `🌸 *Nom :* ${formData.name}\n`;
-    text += `📞 *Téléphone :* ${formData.phone}\n`;
-    text += `📅 *Date souhaitée :* ${formData.date}\n`;
-    text += `📍 *Quartier/Riad/Hôtel :* ${formData.city}\n`;
-    text += `💄 *Prestation :* ${formData.service}\n\n`;
+    if (locale === "ar") {
+      let text = `✨ *طلب حجز موعد مكياج منزلي بمراكش - سارة غلامز* ✨\n\n`;
+      text += `🌸 *الاسم :* ${formData.name}\n`;
+      text += `📞 *رقم الهاتف :* ${formData.phone}\n`;
+      text += `📅 *التاريخ المطلوب :* ${formData.date}\n`;
+      text += `📍 *الحي / الرياض أو الفندق :* ${formData.city}\n`;
+      text += `💄 *الخدمة :* ${formData.service}\n\n`;
 
-    if (formData.message.trim()) {
-      text += `💌 *Message/Détails :*\n_${formData.message.trim()}_\n\n`;
+      if (formData.message.trim()) {
+        text += `💌 *تفاصيل وطلبات خاصة :*\n_${formData.message.trim()}_\n\n`;
+      }
+
+      text += `الرجاء تأكيد الحجز وإفادتي بالتواريخ المتاحة لمراكش! 💕`;
+      return encodeURIComponent(text);
+    } else {
+      let text = `✨ *Demande de Maquillage à Domicile Marrakech - Sarahglam's* ✨\n\n`;
+      text += `🌸 *Nom :* ${formData.name}\n`;
+      text += `📞 *Téléphone :* ${formData.phone}\n`;
+      text += `📅 *Date souhaitée :* ${formData.date}\n`;
+      text += `📍 *Quartier/Riad/Hôtel :* ${formData.city}\n`;
+      text += `💄 *Prestation :* ${formData.service}\n\n`;
+
+      if (formData.message.trim()) {
+        text += `💌 *Message/Détails :*\n_${formData.message.trim()}_\n\n`;
+      }
+
+      text += `Merci de me reconfirmer vos disponibilités pour Marrakech ! 💕`;
+      return encodeURIComponent(text);
     }
-
-    text += `Merci de me reconfirmer vos disponibilités pour Marrakech ! 💕`;
-    return encodeURIComponent(text);
   };
 
   // Form Submit Handler
@@ -90,7 +109,7 @@ export default function Home() {
     e.preventDefault();
 
     if (!formData.name || !formData.phone || !formData.date || !formData.city || !formData.service) {
-      alert("Veuillez remplir tous les champs obligatoires.");
+      alert(locale === "ar" ? "يرجى ملء جميع الحقول المطلوبة." : "Veuillez remplir tous les champs obligatoires.");
       return;
     }
 
@@ -114,10 +133,10 @@ export default function Home() {
 
   // Direct WhatsApp Button click handler
   const handleDirectWhatsAppClick = () => {
-    const text = encodeURIComponent(
-      "Bonjour Sarahglam's ! Je souhaite obtenir des informations sur vos prestations de maquillage à domicile à Marrakech. ✨"
-    );
-    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
+    const text = locale === "ar"
+      ? "مرحباً سارة غلامز! أود الحصول على معلومات حول خدمات المكياج المنزلي في مراكش. ✨"
+      : "Bonjour Sarahglam's ! Je souhaite obtenir des informations sur vos prestations de maquillage à domicile à Marrakech. ✨";
+    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
     window.open(whatsappUrl, "_blank");
   };
 
@@ -129,19 +148,17 @@ export default function Home() {
       <section id="accueil" className="hero watermark-bg">
         <div className="container hero-grid">
           <RevealOnScroll className="hero-content">
-            <span className="hero-tagline">Prestige Makeup Artist Marrakech</span>
+            <span className="hero-tagline">{t("hero.tagline")}</span>
             <h1 className="hero-title">
-              Maquillage à domicile Marrakech <span>avec Sarahglam&apos;s</span>
+              {t("hero.title")} <span>{t("hero.title_span")}</span>
             </h1>
-            <p className="hero-desc">
-              Sublimez vos moments d&apos;exception dans la Ville Rouge. Un service de mise en beauté prestigieux, romantique et sur-mesure, directement chez vous ou dans votre hôtel à Marrakech.
-            </p>
+            <p className="hero-desc">{t("hero.desc")}</p>
             <div className="hero-actions">
               <Link href="#reservation" className="btn btn-primary">
-                Réserver maintenant
+                {t("hero.cta_primary")}
               </Link>
               <Link href="/services" className="btn btn-secondary">
-                Services & Tarifs
+                {t("hero.cta_secondary")}
               </Link>
             </div>
           </RevealOnScroll>
@@ -170,18 +187,26 @@ export default function Home() {
               />
             </div>
             <div className="experience-badge">
-              <span className="experience-years">8+</span>
-              <span className="experience-text">Ans d&apos;Élite</span>
+              <span className="experience-years">{t("about.experience_years")}</span>
+              <span className="experience-text">{t("about.experience_text")}</span>
             </div>
           </RevealOnScroll>
           <RevealOnScroll className="about-content">
-            <span className="script-accent">Maquilleuse Professionnelle</span>
-            <h2 className="about-title">Votre mise en beauté sur-mesure à Marrakech</h2>
+            <span className="script-accent">{t("about.tagline")}</span>
+            <h2 className="about-title">{t("about.title")}</h2>
             <p className="about-bio">
-              Bienvenue dans l&apos;univers exclusif de <strong>Sarahglam&apos;s</strong>, votre prestataire privilège pour le <strong>maquillage à domicile à Marrakech</strong>. En tant que makeup artist passionnée, je me déplace chez vous, dans votre riad ou dans les plus prestigieux hôtels de la ville pour sublimer votre éclat.
+              {locale === "ar" ? (
+                <strong>{t("about.bio1")}</strong>
+              ) : (
+                <>Bienvenue dans l&apos;univers exclusif de <strong>Sarahglam&apos;s</strong>, votre prestataire privilège pour le <strong>maquillage à domicile à Marrakech</strong>. En tant que makeup artist passionnée, je me déplace chez vous, dans votre riad ou dans les plus prestigieux hôtels de la ville pour sublimer votre éclat.</>
+              )}
             </p>
             <p className="about-bio">
-              Spécialisée dans les mariages de destination à Marrakech et les événements haut de gamme, je crée des looks soft-glam et romantiques adaptés à vos envies. J&apos;utilise uniquement des produits iconiques <em>(Charlotte Tilbury, MAC, Dior, Chanel, Natasha Denona)</em> formulés pour résister à la douce chaleur marrakchia et durer parfaitement toute la nuit.
+              {locale === "ar" ? (
+                t("about.bio2")
+              ) : (
+                <>Spécialisée dans les mariages de destination à Marrakech et les événements haut de gamme, je crée des looks soft-glam et romantiques adaptés à vos envies. J&apos;utilise uniquement des produits iconiques <em>(Charlotte Tilbury, MAC, Dior, Chanel, Natasha Denona)</em> formulés pour résister à la douce chaleur marrakchia et durer parfaitement toute la nuit.</>
+              )}
             </p>
 
             <div className="about-features">
@@ -192,10 +217,8 @@ export default function Home() {
                   </svg>
                 </div>
                 <div className="feature-text">
-                  <h3 className="feature-title">Produits de Luxe</h3>
-                  <p className="feature-desc">
-                    Teint glowy impeccable, texture fine et tenue professionnelle longue durée.
-                  </p>
+                  <h3 className="feature-title">{t("about.feature1.title")}</h3>
+                  <p className="feature-desc">{t("about.feature1.desc")}</p>
                 </div>
               </div>
 
@@ -206,10 +229,8 @@ export default function Home() {
                   </svg>
                 </div>
                 <div className="feature-text">
-                  <h3 className="feature-title">Hygiène Meticuleuse</h3>
-                  <p className="feature-desc">
-                    Pinceaux stérilisés, produits désinfectés et applicateurs jetables.
-                  </p>
+                  <h3 className="feature-title">{t("about.feature2.title")}</h3>
+                  <p className="feature-desc">{t("about.feature2.desc")}</p>
                 </div>
               </div>
 
@@ -220,10 +241,8 @@ export default function Home() {
                   </svg>
                 </div>
                 <div className="feature-text">
-                  <h3 className="feature-title">Ponctualité Globale</h3>
-                  <p className="feature-desc">
-                    Déplacement rapide à Gueliz, Hivernage, Palmeraie et environs.
-                  </p>
+                  <h3 className="feature-title">{t("about.feature3.title")}</h3>
+                  <p className="feature-desc">{t("about.feature3.desc")}</p>
                 </div>
               </div>
 
@@ -234,10 +253,8 @@ export default function Home() {
                   </svg>
                 </div>
                 <div className="feature-text">
-                  <h3 className="feature-title">Conseil Personnalisé</h3>
-                  <p className="feature-desc">
-                    Mise en beauté accordée à votre carnation, votre tenue et au climat.
-                  </p>
+                  <h3 className="feature-title">{t("about.feature4.title")}</h3>
+                  <p className="feature-desc">{t("about.feature4.desc")}</p>
                 </div>
               </div>
             </div>
@@ -251,9 +268,9 @@ export default function Home() {
       <section id="prestations" className="services watermark-bg">
         <div className="container">
           <RevealOnScroll className="section-title-wrap">
-            <span className="script-accent">Ma Sélection Prestige</span>
-            <h2 className="section-title">Mes Services à Marrakech</h2>
-            <p className="section-subtitle">L&apos;élégance sous toutes ses déclinaisons</p>
+            <span className="script-accent">{t("prestations.tagline")}</span>
+            <h2 className="section-title">{t("prestations.title")}</h2>
+            <p className="section-subtitle">{t("prestations.subtitle")}</p>
           </RevealOnScroll>
 
           <div className="services-grid">
@@ -264,12 +281,10 @@ export default function Home() {
                   <path d="M2 19h20v2H2zm1-8l3 8h12l3-8-5 4-3-6-3 6z" />
                 </svg>
               </div>
-              <h3>Maquillage Mariée</h3>
-              <p className="service-desc">
-                Le maquillage de vos rêves pour votre mariage à Marrakech. Comprend un essai personnalisé complet à votre domicile et la mise en beauté royale le jour J.
-              </p>
+              <h3>{t("prestations.card1.title")}</h3>
+              <p className="service-desc">{t("prestations.card1.desc")}</p>
               <div className="service-price">
-                <span>Formule complète</span>
+                <span>{t("prestations.card1.price_label")}</span>
                 1800 DH
               </div>
             </RevealOnScroll>
@@ -281,12 +296,10 @@ export default function Home() {
                   <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-13c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5z" />
                 </svg>
               </div>
-              <h3>Maquillage Fiançailles</h3>
-              <p className="service-desc">
-                Un teint frais, lumineux et intensément romantique. Idéal pour être éblouissante sous les projecteurs de votre fête de fiançailles à Marrakech.
-              </p>
+              <h3>{t("prestations.card2.title")}</h3>
+              <p className="service-desc">{t("prestations.card2.desc")}</p>
               <div className="service-price">
-                <span>La prestation</span>
+                <span>{t("prestations.card2.price_label")}</span>
                 1100 DH
               </div>
             </RevealOnScroll>
@@ -298,12 +311,10 @@ export default function Home() {
                   <path d="M12.3 22h-.1c-5.5 0-10-4.5-10-10 0-4.8 3.5-9 8.3-9.8.5-.1 1 .2 1.2.6.2.5 0 1.1-.4 1.4-1.9 1.4-2.9 3.7-2.9 6.1 0 4.1 3.3 7.4 7.4 7.4 2.4 0 4.7-1 6.1-2.9.3-.4.9-.6 1.4-.4.5.2.8.7.6 1.2-.8 4.8-5 8.3-9.8 8.3z" />
                 </svg>
               </div>
-              <h3>Maquillage Soirée</h3>
-              <p className="service-desc">
-                Un look glamour sophistiqué. Smoky-eyes rose gold, liner haute précision et lèvres nude ou rouges intenses pour toutes vos réceptions à Marrakech.
-              </p>
+              <h3>{t("prestations.card3.title")}</h3>
+              <p className="service-desc">{t("prestations.card3.desc")}</p>
               <div className="service-price">
-                <span>La prestation</span>
+                <span>{t("prestations.card3.price_label")}</span>
                 850 DH
               </div>
             </RevealOnScroll>
@@ -311,7 +322,7 @@ export default function Home() {
 
           <RevealOnScroll className="reveal" style={{ textAlign: "center", marginTop: "3.5rem" }}>
             <Link href="/services" className="btn btn-primary">
-              Voir tous les Tarifs & Services
+              {t("prestations.view_all")}
             </Link>
           </RevealOnScroll>
         </div>
@@ -323,9 +334,9 @@ export default function Home() {
       <section id="galerie" className="gallery">
         <div className="container">
           <RevealOnScroll className="section-title-wrap">
-            <span className="script-accent">Mon Portfolio</span>
-            <h2 className="section-title">Mes Réalisations</h2>
-            <p className="section-subtitle">L&apos;élégance marocaine capturée en images</p>
+            <span className="script-accent">{t("gallery.tagline")}</span>
+            <h2 className="section-title">{t("gallery.title")}</h2>
+            <p className="section-subtitle">{t("gallery.subtitle")}</p>
           </RevealOnScroll>
 
           <div className="gallery-grid">
@@ -338,8 +349,8 @@ export default function Home() {
                 <img src={item.src} alt={item.alt} />
                 <div className="gallery-overlay">
                   <div className="gallery-info">
-                    <span className="gallery-category">{item.category}</span>
-                    <h4 className="gallery-title">{item.title}</h4>
+                    <span className="gallery-category">{t(item.categoryKey)}</span>
+                    <h4 className="gallery-title">{t(item.titleKey)}</h4>
                   </div>
                 </div>
               </RevealOnScroll>
@@ -354,9 +365,9 @@ export default function Home() {
       <section id="temoignages" className="testimonials">
         <div className="container">
           <RevealOnScroll className="section-title-wrap">
-            <span className="script-accent">Leur Récit Beauté</span>
-            <h2 className="section-title">Témoignages Clients</h2>
-            <p className="section-subtitle">Des mots doux de nos clientes à Marrakech</p>
+            <span className="script-accent">{t("testimonials.tagline")}</span>
+            <h2 className="section-title">{t("testimonials.title")}</h2>
+            <p className="section-subtitle">{t("testimonials.subtitle")}</p>
           </RevealOnScroll>
 
           <div className="testimonials-slider">
@@ -369,14 +380,12 @@ export default function Home() {
                   </svg>
                 ))}
               </div>
-              <p className="testimonial-text">
-                &quot;Sarah a été tout simplement magique pour mon mariage à la Palmeraie de Marrakech ! Le maquillage soft glam était sublime, lumineux et a parfaitement résisté à la chaleur marrakchia. Une artiste bienveillante et ultra talentueuse !&quot;
-              </p>
+              <p className="testimonial-text">{t("testimonials.client1.text")}</p>
               <div className="client-profile">
                 <div className="client-avatar-placeholder">A</div>
                 <div className="client-details">
-                  <h4>Amandine L.</h4>
-                  <span>Mariage Palmeraie 2025</span>
+                  <h4>{t("testimonials.client1.name")}</h4>
+                  <span>{t("testimonials.client1.info")}</span>
                 </div>
               </div>
             </RevealOnScroll>
@@ -390,14 +399,12 @@ export default function Home() {
                   </svg>
                 ))}
               </div>
-              <p className="testimonial-text">
-                &quot;Prestation incroyable à notre riad à Gueliz. Sarah est ponctuelle, adorable, et travaille avec une hygiène irréprochable. Mes copines et moi avons été maquillées pour ma soirée de fiançailles, c&apos;était tout simplement parfait !&quot;
-              </p>
+              <p className="testimonial-text">{t("testimonials.client2.text")}</p>
               <div className="client-profile">
                 <div className="client-avatar-placeholder">S</div>
                 <div className="client-details">
-                  <h4>Sofia B.</h4>
-                  <span>Fiançailles Riad Gueliz</span>
+                  <h4>{t("testimonials.client2.name")}</h4>
+                  <span>{t("testimonials.client2.info")}</span>
                 </div>
               </div>
             </RevealOnScroll>
@@ -411,14 +418,12 @@ export default function Home() {
                   </svg>
                 ))}
               </div>
-              <p className="testimonial-text">
-                &quot;J&apos;ai fait appel à Sarahglam&apos;s pour un shooting d&apos;éditorial dans le désert d&apos;Agafay. Le teint était incroyable, matifié à la perfection pour résister aux objectifs et aux fortes lumières. Une maquilleuse d&apos;élite à Marrakech !&quot;
-              </p>
+              <p className="testimonial-text">{t("testimonials.client3.text")}</p>
               <div className="client-profile">
                 <div className="client-avatar-placeholder">L</div>
                 <div className="client-details">
-                  <h4>Léa M.</h4>
-                  <span>Shooting Éditorial Agafay</span>
+                  <h4>{t("testimonials.client3.name")}</h4>
+                  <span>{t("testimonials.client3.info")}</span>
                 </div>
               </div>
             </RevealOnScroll>
@@ -432,11 +437,9 @@ export default function Home() {
       <section id="reservation" className="booking">
         <div className="container booking-grid">
           <RevealOnScroll className="booking-info">
-            <span className="script-accent">Contact & Réservations</span>
-            <h2 className="booking-title">Planifiez votre mise en beauté</h2>
-            <p className="booking-desc">
-              Remplissez le formulaire ci-contre pour soumettre votre demande. Vous recevrez une confirmation instantanée via WhatsApp ou par appel téléphonique sous 2 heures.
-            </p>
+            <span className="script-accent">{t("booking.tagline")}</span>
+            <h2 className="booking-title">{t("booking.title")}</h2>
+            <p className="booking-desc">{t("booking.desc")}</p>
 
             <div className="booking-meta">
               <div className="meta-item">
@@ -446,8 +449,8 @@ export default function Home() {
                   </svg>
                 </div>
                 <div className="meta-text">
-                  <h5>Adresse Salon & Bureau</h5>
-                  <p>Gueliz, Marrakech, Maroc</p>
+                  <h5>{t("booking.address_title")}</h5>
+                  <p>{t("booking.address_text")}</p>
                 </div>
               </div>
 
@@ -458,7 +461,7 @@ export default function Home() {
                   </svg>
                 </div>
                 <div className="meta-text">
-                  <h5>E-mail de Contact</h5>
+                  <h5>{t("booking.email_title")}</h5>
                   <p>contact@sarahglams.com</p>
                 </div>
               </div>
@@ -470,7 +473,7 @@ export default function Home() {
                   </svg>
                 </div>
                 <div className="meta-text">
-                  <h5>Réservations & WhatsApp</h5>
+                  <h5>{t("booking.phone_title")}</h5>
                   <p>+212 6 12 34 56 78</p>
                 </div>
               </div>
@@ -482,24 +485,24 @@ export default function Home() {
             <form onSubmit={handleFormSubmit} className="booking-form">
               <div className="form-row">
                 <div className="form-group">
-                  <label htmlFor="form-name">Nom complet *</label>
+                  <label htmlFor="form-name">{t("booking.form.name_label")}</label>
                   <input
                     type="text"
                     id="form-name"
                     className="form-input"
-                    placeholder="Ex: Amandine Martin"
+                    placeholder={t("booking.form.name_placeholder")}
                     value={formData.name}
                     onChange={handleInputChange}
                     required
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="form-phone">N° Téléphone *</label>
+                  <label htmlFor="form-phone">{t("booking.form.phone_label")}</label>
                   <input
                     type="tel"
                     id="form-phone"
                     className="form-input"
-                    placeholder="Ex: +212 6 12 34 56 78"
+                    placeholder={t("booking.form.phone_placeholder")}
                     value={formData.phone}
                     onChange={handleInputChange}
                     required
@@ -509,7 +512,7 @@ export default function Home() {
 
               <div className="form-row">
                 <div className="form-group">
-                  <label htmlFor="form-date">Date souhaitée *</label>
+                  <label htmlFor="form-date">{t("booking.form.date_label")}</label>
                   <input
                     type="date"
                     id="form-date"
@@ -520,12 +523,12 @@ export default function Home() {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="form-city">Quartier / Riad ou Hôtel *</label>
+                  <label htmlFor="form-city">{t("booking.form.city_label")}</label>
                   <input
                     type="text"
                     id="form-city"
                     className="form-input"
-                    placeholder="Ex: Gueliz / Riad Zaytoun"
+                    placeholder={t("booking.form.city_placeholder")}
                     value={formData.city}
                     onChange={handleInputChange}
                     required
@@ -534,7 +537,7 @@ export default function Home() {
               </div>
 
               <div className="form-group">
-                <label htmlFor="form-service">Prestation désirée *</label>
+                <label htmlFor="form-service">{t("booking.form.service_label")}</label>
                 <select
                   id="form-service"
                   className="form-input"
@@ -542,21 +545,21 @@ export default function Home() {
                   onChange={handleInputChange}
                   required
                 >
-                  <option value="" disabled>-- Sélectionnez une mise en beauté --</option>
-                  <option value="Maquillage Mariée (Essai + Jour J)">Maquillage Mariée (Essai + Jour J) - 1800 DH</option>
-                  <option value="Maquillage Fiançailles">Maquillage Fiançailles - 1100 DH</option>
-                  <option value="Maquillage Soirée">Maquillage Soirée - 850 DH</option>
-                  <option value="Maquillage Invitée">Maquillage Invitée - 750 DH</option>
-                  <option value="Maquillage Shooting">Maquillage Shooting - 950 DH</option>
+                  <option value="" disabled>{t("booking.form.service_default")}</option>
+                  <option value="Maquillage Mariée (Essai + Jour J)">{t("booking.form.service_opt1")}</option>
+                  <option value="Maquillage Fianiailles">{t("booking.form.service_opt2")}</option>
+                  <option value="Maquillage Soirée">{t("booking.form.service_opt3")}</option>
+                  <option value="Maquillage Invitée">{t("booking.form.service_opt4")}</option>
+                  <option value="Maquillage Shooting">{t("booking.form.service_opt5")}</option>
                 </select>
               </div>
 
               <div className="form-group">
-                <label htmlFor="form-message">Message, détails ou demandes spéciales (Optionnel)</label>
+                <label htmlFor="form-message">{t("booking.form.message_label")}</label>
                 <textarea
                   id="form-message"
                   className="form-input"
-                  placeholder="Ex: Précisions sur l'heure, votre type de peau, ou si vous souhaitez maquiller des invitées en plus..."
+                  placeholder={t("booking.form.message_placeholder")}
                   value={formData.message}
                   onChange={handleInputChange}
                 ></textarea>
@@ -568,9 +571,9 @@ export default function Home() {
                   className="btn btn-primary"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? "Redirection en cours... ✨" : "Demander ma réservation"}
+                  {isSubmitting ? t("booking.form.submit_loading") : t("booking.form.submit")}
                 </button>
-                <div className="form-divider">ou</div>
+                <div className="form-divider">{t("booking.form.or")}</div>
                 <button
                   type="button"
                   id="direct-whatsapp-btn"
@@ -580,7 +583,7 @@ export default function Home() {
                   <svg viewBox="0 0 24 24">
                     <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.5-5.739-1.446L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.97C16.479 2.005 14.019.98 11.997.98 6.561.98 2.135 5.352 2.132 10.783c0 1.693.456 3.348 1.32 4.792l-.997 3.639 3.73-.974.002.002c1.42.825 2.94 1.258 4.49 1.258z" />
                   </svg>
-                  Discuter sur WhatsApp
+                  {t("booking.form.whatsapp_direct")}
                 </button>
               </div>
             </form>
@@ -594,8 +597,8 @@ export default function Home() {
       <section id="reseaux" className="socials">
         <div className="container">
           <RevealOnScroll className="reveal">
-            <span className="script-accent">Rejoignez ma communauté</span>
-            <h2 className="social-title">Suivez mes coulisses à Marrakech</h2>
+            <span className="script-accent">{t("socials.tagline")}</span>
+            <h2 className="social-title">{t("socials.title")}</h2>
             <a
               href="https://instagram.com/sarahglams"
               target="_blank"
@@ -686,7 +689,7 @@ export default function Home() {
               alt={lightboxImage.alt}
             />
             <div className="lightbox-caption">
-              {lightboxImage.category} - {lightboxImage.title}
+              {t(lightboxImage.categoryKey)} - {t(lightboxImage.titleKey)}
             </div>
           </div>
         </div>
