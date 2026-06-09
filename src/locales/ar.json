@@ -88,6 +88,7 @@
   "booking.form.service_opt3": "مكياج السهرات - 850 درهم",
   "booking.form.service_opt4": "مكياج الضيوف والمرافقات - 750 درهم",
   "booking.form.service_opt5": "مكياج جلسات التصوير - 950 درهم",
+  "booking.form.service_opt6": "أخرى",
   "booking.form.message_label": "رسالة، تفاصيل أو طلبات خاصة (اختياري)",
   "booking.form.message_placeholder": "مثال: توضيحات حول الوقت، نوع بشرتكِ، أو رغبتكِ في تجميل مرافقات إضافيات...",
   "booking.form.submit": "طلب الحجز الآن",

@@ -88,6 +88,7 @@
   "booking.form.service_opt3": "Evening Makeup - 850 DH",
   "booking.form.service_opt4": "Guest Makeup - 750 DH",
   "booking.form.service_opt5": "Photoshoot Makeup - 950 DH",
+  "booking.form.service_opt6": "Other",
   "booking.form.message_label": "Message, details, or special requests (Optional)",
   "booking.form.message_placeholder": "e.g., Details on timing, your skin type, or if you wish to make up extra guests...",
   "booking.form.submit": "Request My Booking",

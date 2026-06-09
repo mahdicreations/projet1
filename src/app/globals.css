@@ -285,6 +285,9 @@ h4 {
   z-index: 1000;
   background: transparent;
   transition: all var(--transition-normal);
+  /* Support notch / safe area on modern phones */
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 }
 
 .header.scrolled {
@@ -426,14 +429,19 @@ h4 {
   width: 80%;
   max-width: 320px;
   height: 100vh;
+  height: 100dvh; /* Dynamic viewport height — accounts for browser chrome on phones */
   background-color: var(--color-ivory);
   z-index: 999;
-  padding: 6rem 2rem 2rem;
+  padding: 5rem 2rem 2rem;
+  padding-top: max(5rem, env(safe-area-inset-top, 5rem));
+  padding-bottom: max(2rem, env(safe-area-inset-bottom, 2rem));
   box-shadow: -10px 0 30px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
   transition: right var(--transition-normal);
+  overflow-y: auto; /* Allow scrolling if content overflows */
+  -webkit-overflow-scrolling: touch;
 }
 
 .mobile-nav.open {
@@ -463,10 +471,11 @@ h4 {
 /* --- Hero Section --- */
 .hero {
   position: relative;
+  min-height: 100svh; /* Small viewport height — avoids mobile browser chrome jump */
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding-top: 100px;
+  padding-top: 110px;
   padding-bottom: 60px;
   background: var(--grad-soft-fade);
   overflow: hidden;
@@ -508,7 +517,7 @@ h4 {
 }
 
 .hero-title {
-  font-size: 2.8rem;
+  font-size: clamp(2rem, 7vw, 2.8rem);
   color: var(--color-dark);
   font-weight: 400;
   line-height: 1.15;
@@ -517,7 +526,7 @@ h4 {
 
 .hero-title span {
   font-family: var(--font-script);
-  font-size: 3.5rem;
+  font-size: clamp(2.5rem, 9vw, 3.5rem);
   color: var(--color-primary);
   display: block;
   margin-top: 0.5rem;
@@ -535,8 +544,14 @@ h4 {
 .hero-actions {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.8rem;
   justify-content: center;
+  align-items: center;
+}
+
+.hero-actions .btn {
+  width: 100%;
+  max-width: 280px;
 }
 
 .hero-visual {
@@ -619,15 +634,17 @@ h4 {
 
 .experience-badge {
   position: absolute;
-  bottom: 25px;
-  left: -15px;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   background: var(--grad-rose-gold);
   color: var(--color-white);
-  padding: 1.2rem 1.8rem;
+  padding: 1rem 1.5rem;
   border-radius: var(--border-radius-md);
   box-shadow: var(--shadow-premium);
   text-align: center;
   z-index: 3;
+  white-space: nowrap;
 }
 
 .experience-years {
@@ -673,8 +690,8 @@ h4 {
 
 .about-features {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
   text-align: left;
   margin-top: 2rem;
 }
@@ -1450,6 +1467,18 @@ textarea.form-input {
    MEDIA QUERIES - RESPONSIVE SCALING (MOBILE FIRST)
    ======================================================================== */
 
+/* Small Tablets / Large Mobile (480px and up) */
+@media (min-width: 480px) {
+  .about-features {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero-actions .btn {
+    width: auto;
+    max-width: none;
+  }
+}
+
 /* Small Tablets / Large Mobile (576px and up) */
 @media (min-width: 576px) {
   .hero-title {
@@ -1462,10 +1491,11 @@ textarea.form-input {
 
   .hero-actions {
     flex-direction: row;
+    align-items: center;
   }
 
-  .about-features {
-    grid-template-columns: 1fr 1fr;
+  .hero-actions .btn {
+    width: auto;
   }
 
   .services-grid {
@@ -1526,8 +1556,9 @@ textarea.form-input {
   }
 
   .experience-badge {
-    left: -25px;
+    left: -20px;
     bottom: 30px;
+    transform: none;
   }
 
   /* Services grid */
@@ -1879,7 +1910,7 @@ textarea.form-input {
     position: relative;
     width: 100%;
     min-height: 70px;
-    padding: 0.5rem 1.5rem !important; /* Force side paddings on mobile! */
+    padding: 0.5rem 1rem !important;
   }
 
   .logo-wrap {
@@ -1890,13 +1921,13 @@ textarea.form-input {
   }
 
   .logo-img {
-    height: 80px !important; /* Mobile logo: exactly 80px, forced */
+    height: 65px !important;
   }
 
   /* Position the language flag switcher at the far left of the mobile header */
   .nav-cta-group {
     position: absolute;
-    left: 1.5rem;
+    left: 1rem;
     z-index: 1002;
     display: flex;
     align-items: center;
@@ -1906,17 +1937,87 @@ textarea.form-input {
   .lang-switcher {
     border-right: none;
     padding-right: 0;
+    gap: 0.25rem;
+  }
+
+  /* Shrink flag buttons slightly on mobile */
+  .lang-btn {
+    width: 24px;
+    height: 24px;
   }
 
   .burger-menu {
     position: absolute;
-    right: 2.2rem !important; /* Shifted slightly to the left to prevent edge crowding */
-    display: flex !important; /* Force visible on mobile */
+    right: 1rem !important;
+    display: flex !important;
     z-index: 1005;
   }
   
   .burger-line {
-    background-color: var(--color-dark) !important; /* Ensure visibility */
+    background-color: var(--color-dark) !important;
+  }
+}
+
+/* Extra small phones (< 375px) */
+@media (max-width: 374px) {
+  .hero-title {
+    font-size: 1.85rem;
+  }
+
+  .hero-title span {
+    font-size: 2.4rem;
+  }
+
+  .hero-tagline {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+  }
+
+  .hero-desc {
+    font-size: 0.9rem;
+  }
+
+  .hero-actions .btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.8rem;
+  }
+
+  .script-accent {
+    font-size: 1.8rem;
+  }
+
+  .section-title {
+    font-size: 1.9rem;
+  }
+
+  .booking-card {
+    padding: 1.5rem 1.2rem;
+  }
+
+  .testimonial-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .service-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .about-title {
+    font-size: 1.8rem;
+  }
+
+  .container {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+
+  .lang-btn {
+    width: 22px;
+    height: 22px;
+  }
+
+  .logo-img {
+    height: 55px !important;
   }
 }
 
@@ -2062,8 +2163,9 @@ html[dir="rtl"] .experience-badge {
 
 @media (max-width: 767px) {
   html[dir="rtl"] .experience-badge {
-    right: 50%;
-    transform: translateX(50%);
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 
@@ -2078,6 +2180,8 @@ html[dir="rtl"] .mobile-nav {
   left: -100%;
   box-shadow: 10px 0 30px rgba(0, 0, 0, 0.05);
   transition: left var(--transition-normal);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 html[dir="rtl"] .mobile-nav.open {

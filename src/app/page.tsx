@@ -586,6 +586,7 @@ export default function Home() {
                   <option value="Maquillage Soirée">{t("booking.form.service_opt3")}</option>
                   <option value="Maquillage Invitée">{t("booking.form.service_opt4")}</option>
                   <option value="Maquillage Shooting">{t("booking.form.service_opt5")}</option>
+                  <option value="Autre">{t("booking.form.service_opt6")}</option>
                 </select>
               </div>
 

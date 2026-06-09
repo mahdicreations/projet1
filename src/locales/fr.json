@@ -88,6 +88,7 @@
   "booking.form.service_opt3": "Maquillage Soirée - 850 DH",
   "booking.form.service_opt4": "Maquillage Invitée - 750 DH",
   "booking.form.service_opt5": "Maquillage Shooting - 950 DH",
+  "booking.form.service_opt6": "Autre",
   "booking.form.message_label": "Message, détails ou demandes spéciales (Optionnel)",
   "booking.form.message_placeholder": "Ex: Précisions sur l'heure, votre type de peau, ou si vous souhaitez maquiller des invitées en plus...",
   "booking.form.submit": "Demander ma réservation",
