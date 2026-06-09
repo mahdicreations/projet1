@@ -30,6 +30,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const savedLocale = localStorage.getItem("sarahglams_locale") as Locale;
     if (savedLocale === "fr" || savedLocale === "ar" || savedLocale === "en") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setLocaleState(savedLocale);
     }
   }, []);

@@ -20,7 +20,7 @@ export default function Footer() {
             height={42}
             style={{ objectFit: "contain", height: "auto" }}
           />
-          <span className="footer-brand-title">Sarahglam's</span>
+          <span className="footer-brand-title">Sarahglam&apos;s</span>
           <span className="footer-brand-tagline">{t("footer.brand.tagline")}</span>
         </div>
 
