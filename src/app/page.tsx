@@ -1,18 +1,14 @@
-"use client";
+// NO "use client" — this is a Server Component.
+// All static sections render as real HTML in the initial response.
+// Only BookingForm and GalleryWithLightbox are client islands.
 
-import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import dynamic from "next/dynamic";
-import { useLanguage } from "@/context/LanguageContext";
+import RevealOnScroll from "@/components/RevealOnScroll";
+import BookingForm from "@/components/BookingForm";
+import GalleryWithLightbox from "@/components/GalleryWithLightbox";
+import { getDict, st } from "@/lib/getDictionary";
 
-// Lazy-load below-the-fold heavy component
-const RevealOnScroll = dynamic(() => import("@/components/RevealOnScroll"), {
-  ssr: false,
-  loading: () => <div style={{ minHeight: "2px" }} />,
-});
-
-// Gallery Items definition
 const GALLERY_ITEMS = [
   {
     id: 1,
@@ -38,140 +34,18 @@ const GALLERY_ITEMS = [
 ];
 
 export default function Home() {
-  const { locale, t } = useLanguage();
-
-  // Lightbox State
-  const [lightboxImage, setLightboxImage] = useState<typeof GALLERY_ITEMS[0] | null>(null);
-
-  // Booking Form State
-  const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    date: "",
-    city: "",
-    service: "",
-    message: "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  // WhatsApp Config
-  const WHATSAPP_NUMBER = "212784477494";
-
-  // Handle Form Change
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
-  ) => {
-    const { id, value } = e.target;
-    const fieldName = id.replace("form-", "");
-    setFormData((prev) => ({ ...prev, [fieldName]: value }));
-  };
-
-  // Open Lightbox
-  const openLightbox = (item: typeof GALLERY_ITEMS[0]) => {
-    setLightboxImage(item);
-    document.body.classList.add("no-scroll");
-  };
-
-  // Close Lightbox
-  const closeLightbox = () => {
-    setLightboxImage(null);
-    document.body.classList.remove("no-scroll");
-  };
-
-  // Generate WhatsApp Message Link
-  const generateWhatsAppMessage = () => {
-    if (locale === "ar") {
-      let text = `✨ *طلب حجز موعد مكياج منزلي بمراكش - سارة غلامز* ✨\n\n`;
-      text += `🌸 *الاسم :* ${formData.name}\n`;
-      text += `📞 *رقم الهاتف :* ${formData.phone}\n`;
-      text += `📅 *التاريخ المطلوب :* ${formData.date}\n`;
-      text += `📍 *الحي / الرياض أو الفندق :* ${formData.city}\n`;
-      text += `💄 *الخدمة :* ${formData.service}\n\n`;
-
-      if (formData.message.trim()) {
-        text += `💌 *تفاصيل وطلبات خاصة :*\n_${formData.message.trim()}_\n\n`;
-      }
-
-      text += `الرجاء تأكيد الحجز وإفادتي بالتواريخ المتاحة لمراكش! 💕`;
-      return encodeURIComponent(text);
-    } else if (locale === "en") {
-      let text = `✨ *In-Home Makeup Booking Request Marrakech - Sarahglam's* ✨\n\n`;
-      text += `🌸 *Name:* ${formData.name}\n`;
-      text += `📞 *Phone:* ${formData.phone}\n`;
-      text += `📅 *Requested Date:* ${formData.date}\n`;
-      text += `📍 *Neighborhood / Riad or Hotel:* ${formData.city}\n`;
-      text += `💄 *Service Package:* ${formData.service}\n\n`;
-
-      if (formData.message.trim()) {
-        text += `💌 *Details / Special Requests:*\n_${formData.message.trim()}_\n\n`;
-      }
-
-      text += `Please confirm your availability for Marrakech! 💕`;
-      return encodeURIComponent(text);
-    } else {
-      let text = `✨ *Demande de Maquillage à Domicile Marrakech - Sarahglam's* ✨\n\n`;
-      text += `🌸 *Nom :* ${formData.name}\n`;
-      text += `📞 *Téléphone :* ${formData.phone}\n`;
-      text += `📅 *Date souhaitée :* ${formData.date}\n`;
-      text += `📍 *Quartier/Riad/Hôtel :* ${formData.city}\n`;
-      text += `💄 *Prestation :* ${formData.service}\n\n`;
-
-      if (formData.message.trim()) {
-        text += `💌 *Message/Détails :*\n_${formData.message.trim()}_\n\n`;
-      }
-
-      text += `Merci de me reconfirmer vos disponibilités pour Marrakech ! 💕`;
-      return encodeURIComponent(text);
-    }
-  };
-
-  // Form Submit Handler
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!formData.name || !formData.phone || !formData.date || !formData.city || !formData.service) {
-      alert(locale === "ar" ? "يرجى ملء جميع الحقول المطلوبة." : locale === "en" ? "Please fill out all required fields." : "Veuillez remplir tous les champs obligatoires.");
-      return;
-    }
-
-    setIsSubmitting(true);
-    const whatsappText = generateWhatsAppMessage();
-    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappText}`;
-
-    setTimeout(() => {
-      window.open(whatsappUrl, "_blank");
-      setIsSubmitting(false);
-      setFormData({
-        name: "",
-        phone: "",
-        date: "",
-        city: "",
-        service: "",
-        message: "",
-      });
-    }, 1000);
-  };
-
-  // Direct WhatsApp Button click handler
-  const handleDirectWhatsAppClick = () => {
-    let text = "Bonjour Sarahglam's ! Je souhaite obtenir des informations sur vos prestations de maquillage à domicile à Marrakech. ✨";
-    if (locale === "ar") {
-      text = "مرحباً سارة غلامز! أود الحصول على معلومات حول خدمات المكياج المنزلي في مراكش. ✨";
-    } else if (locale === "en") {
-      text = "Hello Sarahglam's! I would like to get information about your in-home makeup services in Marrakech. ✨";
-    }
-    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
-    window.open(whatsappUrl, "_blank");
-  };
+  // Server-side: always render in French (default locale).
+  // The client LanguageContext takes over after hydration for language switching.
+  const d = getDict("fr");
+  const t = (key: string) => st(d, key);
 
   return (
     <main>
       {/* ========================================================================
-           HERO SECTION — Above-the-fold: no RevealOnScroll wrapper (avoids hiding LCP)
+           HERO SECTION — Above-the-fold: SSR rendered, no RevealOnScroll wrapper
            ======================================================================== */}
       <section id="accueil" className="hero watermark-bg">
         <div className="container hero-grid">
-          {/* Hero content: rendered directly, no lazy observer delay */}
           <div className="hero-content reveal active">
             <span className="hero-tagline">{t("hero.tagline")}</span>
             <h1 className="hero-title">
@@ -187,7 +61,6 @@ export default function Home() {
               </Link>
             </div>
           </div>
-          {/* Hero image: priority={true} = LCP preload, fetchpriority=high, no lazy */}
           <div className="hero-visual reveal active">
             <div className="hero-img-frame">
               <Image
@@ -228,15 +101,10 @@ export default function Home() {
             <span className="script-accent">{t("about.tagline")}</span>
             <h2 className="about-title">{t("about.title")}</h2>
             <p className="about-bio">
-              {locale === "ar" ? (
-                <strong>{t("about.bio1")}</strong>
-              ) : (
-                <>Welcome to the exclusive world of <strong>Sarahglam&apos;s</strong>, {t("about.bio1").replace("Welcome to the exclusive world of Sarahglam's, ", "")}</>
-              )}
+              Bienvenue dans l&apos;univers exclusif de <strong>Sarahglam&apos;s</strong>,{" "}
+              {t("about.bio1").replace("Bienvenue dans l'univers exclusif de Sarahglam's, ", "")}
             </p>
-            <p className="about-bio">
-              {t("about.bio2")}
-            </p>
+            <p className="about-bio">{t("about.bio2")}</p>
 
             <div className="about-features">
               <div className="feature-item">
@@ -306,7 +174,7 @@ export default function Home() {
             {/* Card 1: Mariée */}
             <RevealOnScroll className="service-card">
               <div className="service-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ fill: 'none' }}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ fill: "none" }}>
                   <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
                   <path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/>
                 </svg>
@@ -319,10 +187,10 @@ export default function Home() {
               </div>
             </RevealOnScroll>
 
-            {/* Card 2: Fiancailles */}
+            {/* Card 2: Fiançailles */}
             <RevealOnScroll className="service-card">
               <div className="service-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ fill: 'none' }}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ fill: "none" }}>
                   <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
                 </svg>
               </div>
@@ -337,7 +205,7 @@ export default function Home() {
             {/* Card 3: Soirée */}
             <RevealOnScroll className="service-card">
               <div className="service-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ fill: 'none' }}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ fill: "none" }}>
                   <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
                 </svg>
               </div>
@@ -352,7 +220,7 @@ export default function Home() {
             {/* Card 4: Volume Russe */}
             <RevealOnScroll className="service-card">
               <div className="service-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ fill: 'none' }}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ fill: "none" }}>
                   <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/>
                   <circle cx="12" cy="12" r="3"/>
                 </svg>
@@ -368,7 +236,7 @@ export default function Home() {
             {/* Card 5: Cil à Cil */}
             <RevealOnScroll className="service-card">
               <div className="service-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ fill: 'none' }}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ fill: "none" }}>
                   <path d="M12.67 19a2 2 0 0 0 1.416-.588l6.154-6.172a6 6 0 0 0-8.49-8.49L5.586 9.914A2 2 0 0 0 5 11.328V18a1 1 0 0 0 1 1z"/>
                   <path d="M16 8 2 22"/><path d="M17.5 15H9"/>
                 </svg>
@@ -384,7 +252,7 @@ export default function Home() {
             {/* Card 6: Shooting */}
             <RevealOnScroll className="service-card">
               <div className="service-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ fill: 'none' }}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ fill: "none" }}>
                   <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
                   <circle cx="12" cy="13" r="3"/>
                 </svg>
@@ -407,7 +275,7 @@ export default function Home() {
       </section>
 
       {/* ========================================================================
-           GALERIE SECTION (Interactive React Lightbox)
+           GALERIE SECTION — GalleryWithLightbox is a client island
            ======================================================================== */}
       <section id="galerie" className="gallery">
         <div className="container">
@@ -417,29 +285,8 @@ export default function Home() {
             <p className="section-subtitle">{t("gallery.subtitle")}</p>
           </RevealOnScroll>
 
-          <div className="gallery-grid">
-            {GALLERY_ITEMS.map((item) => (
-              <RevealOnScroll
-                key={item.id}
-                className="gallery-item"
-                onClick={() => openLightbox(item)}
-              >
-                <Image
-                  src={item.src}
-                  alt={item.alt}
-                  width={600}
-                  height={750}
-                  style={{ objectFit: "cover", width: "100%", height: "100%" }}
-                />
-                <div className="gallery-overlay">
-                  <div className="gallery-info">
-                    <span className="gallery-category">{t(item.categoryKey)}</span>
-                    <h4 className="gallery-title">{t(item.titleKey)}</h4>
-                  </div>
-                </div>
-              </RevealOnScroll>
-            ))}
-          </div>
+          {/* Client island: handles lightbox interactivity */}
+          <GalleryWithLightbox items={GALLERY_ITEMS} />
         </div>
       </section>
 
@@ -455,7 +302,6 @@ export default function Home() {
           </RevealOnScroll>
 
           <div className="testimonials-slider">
-            {/* Testimonial 1 */}
             <RevealOnScroll className="testimonial-card">
               <div className="rating-stars">
                 {[...Array(5)].map((_, i) => (
@@ -474,7 +320,6 @@ export default function Home() {
               </div>
             </RevealOnScroll>
 
-            {/* Testimonial 2 */}
             <RevealOnScroll className="testimonial-card">
               <div className="rating-stars">
                 {[...Array(5)].map((_, i) => (
@@ -493,7 +338,6 @@ export default function Home() {
               </div>
             </RevealOnScroll>
 
-            {/* Testimonial 3 */}
             <RevealOnScroll className="testimonial-card">
               <div className="rating-stars">
                 {[...Array(5)].map((_, i) => (
@@ -516,7 +360,7 @@ export default function Home() {
       </section>
 
       {/* ========================================================================
-           BOOKING SECTION
+           BOOKING SECTION — BookingForm is the client island
            ======================================================================== */}
       <section id="reservation" className="booking">
         <div className="container booking-grid">
@@ -564,118 +408,9 @@ export default function Home() {
             </div>
           </RevealOnScroll>
 
-          {/* Form Card Container */}
+          {/* Client island: handles form state and WhatsApp submission */}
           <RevealOnScroll className="booking-card">
-            <form onSubmit={handleFormSubmit} className="booking-form">
-              <div className="form-row">
-                <div className="form-group">
-                  <label htmlFor="form-name">{t("booking.form.name_label")}</label>
-                  <input
-                    type="text"
-                    id="form-name"
-                    className="form-input"
-                    placeholder={t("booking.form.name_placeholder")}
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="form-phone">{t("booking.form.phone_label")}</label>
-                  <input
-                    type="tel"
-                    id="form-phone"
-                    className="form-input"
-                    placeholder={t("booking.form.phone_placeholder")}
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="form-row">
-                <div className="form-group">
-                  <label htmlFor="form-date">{t("booking.form.date_label")}</label>
-                  <input
-                    type="date"
-                    id="form-date"
-                    className="form-input"
-                    value={formData.date}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="form-city">{t("booking.form.city_label")}</label>
-                  <input
-                    type="text"
-                    id="form-city"
-                    className="form-input"
-                    placeholder={t("booking.form.city_placeholder")}
-                    value={formData.city}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="form-service">{t("booking.form.service_label")}</label>
-                <select
-                  id="form-service"
-                  className="form-input"
-                  value={formData.service}
-                  onChange={handleInputChange}
-                  required
-                >
-                  <option value="" disabled>{t("booking.form.service_default")}</option>
-                  <option value="Maquillage Mariée (Essai + Jour J)">{t("booking.form.service_opt1")}</option>
-                  <option value="Maquillage Fiançailles">{t("booking.form.service_opt2")}</option>
-                  <option value="Maquillage Soirée">{t("booking.form.service_opt3")}</option>
-                  <option value="Maquillage Invitée">{t("booking.form.service_opt4")}</option>
-                  <option value="Maquillage Shooting">{t("booking.form.service_opt5")}</option>
-                  <option value="Extension de cils Volume Russe">{t("booking.form.service_opt7")}</option>
-                  <option value="Extension de cils Cil à Cil">{t("booking.form.service_opt8")}</option>
-                  <option value="Maquillage Tous Les Jours">{t("booking.form.service_opt9")}</option>
-                  <option value="Maquillage Express">{t("booking.form.service_opt10")}</option>
-                  <option value="Autre">{t("booking.form.service_opt6")}</option>
-                </select>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="form-message">{t("booking.form.message_label")}</label>
-                <textarea
-                  id="form-message"
-                  className="form-input"
-                  placeholder={t("booking.form.message_placeholder")}
-                  value={formData.message}
-                  onChange={handleInputChange}
-                ></textarea>
-              </div>
-
-              <div className="form-actions">
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? t("booking.form.submit_loading") : t("booking.form.submit")}
-                </button>
-                <div className="form-divider">{t("booking.form.or")}</div>
-                <button
-                  type="button"
-                  id="direct-whatsapp-btn"
-                  className="btn btn-whatsapp"
-                  onClick={handleDirectWhatsAppClick}
-                >
-                  <svg viewBox="0 0 24 24">
-                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.5-5.739-1.446L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.97C16.479 2.005 14.019.98 11.997.98 6.561.98 2.135 5.352 2.132 10.783c0 1.693.456 3.348 1.32 4.792l-.997 3.639 3.73-.974.002.002c1.42.825 2.94 1.258 4.49 1.258z" />
-                  </svg>
-                  {t("booking.form.whatsapp_direct")}
-                </button>
-              </div>
-            </form>
+            <BookingForm />
           </RevealOnScroll>
         </div>
       </section>
@@ -698,7 +433,6 @@ export default function Home() {
             </a>
 
             <div className="social-icons">
-              {/* Instagram */}
               <a
                 href="https://www.instagram.com/sarahglam.s"
                 target="_blank"
@@ -710,7 +444,6 @@ export default function Home() {
                   <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
                 </svg>
               </a>
-              {/* Facebook */}
               <a
                 href="https://facebook.com/sarahglams"
                 target="_blank"
@@ -722,7 +455,6 @@ export default function Home() {
                   <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                 </svg>
               </a>
-              {/* TikTok */}
               <a
                 href="https://www.tiktok.com/@sarahglams0"
                 target="_blank"
@@ -734,7 +466,6 @@ export default function Home() {
                   <path d="M12.525.02c1.31-.03 2.61-.01 3.91-.02.08 1.53.63 3.02 1.59 4.23.99 1.15 2.37 1.93 3.86 2.19v3.9c-1.57-.02-3.11-.53-4.43-1.4-1.02-.71-1.84-1.68-2.42-2.8-.08 1.83-.03 3.67-.05 5.5-.04 2.21-.63 4.41-1.78 6.27-1.34 2.11-3.56 3.63-6 4.09-2.27.42-4.66.07-6.72-1.01C1.04 19.34-.14 16.94-.03 14.4c.05-2.5 1.29-4.89 3.32-6.3 1.87-1.35 4.22-1.89 6.51-1.49v4.03c-1.31-.38-2.74-.15-3.87.58-1.07.67-1.74 1.85-1.78 3.12-.05 1.54.83 2.99 2.23 3.62 1.34.61 2.94.46 4.14-.38.98-.67 1.51-1.8 1.5-2.99.04-4.88.02-9.75.02-14.62-.01.02-.01.02 0 0z" />
                 </svg>
               </a>
-              {/* Snapchat */}
               <a
                 href="https://snapchat.com/t/9aXMpWsa"
                 target="_blank"
@@ -750,42 +481,6 @@ export default function Home() {
           </RevealOnScroll>
         </div>
       </section>
-
-      {/* ========================================================================
-           LIGHTBOX POPUP (Interactive React Overlay)
-           ======================================================================== */}
-      {lightboxImage && (
-        <div
-          className="lightbox open"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Visualisateur de photo en grand format"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) closeLightbox();
-          }}
-        >
-          <div className="lightbox-content">
-            <button
-              className="lightbox-close"
-              aria-label="Fermer la vue grand format"
-              onClick={closeLightbox}
-            >
-              &times;
-            </button>
-            <Image
-              className="lightbox-img"
-              src={lightboxImage.src}
-              alt={lightboxImage.alt}
-              width={900}
-              height={1100}
-              style={{ objectFit: "contain", width: "100%", height: "auto", maxHeight: "85vh" }}
-            />
-            <div className="lightbox-caption">
-              {t(lightboxImage.categoryKey)} - {t(lightboxImage.titleKey)}
-            </div>
-          </div>
-        </div>
-      )}
     </main>
   );
 }
