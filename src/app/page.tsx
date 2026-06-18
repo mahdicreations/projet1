@@ -306,8 +306,9 @@ export default function Home() {
             {/* Card 1: Mariée */}
             <RevealOnScroll className="service-card">
               <div className="service-icon">
-                <svg viewBox="0 0 24 24">
-                  <path d="M2 19h20v2H2zm1-8l3 8h12l3-8-5 4-3-6-3 6z" />
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ fill: 'none' }}>
+                  <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+                  <path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/>
                 </svg>
               </div>
               <h3>{t("prestations.card1.title")}</h3>
@@ -321,8 +322,8 @@ export default function Home() {
             {/* Card 2: Fiancailles */}
             <RevealOnScroll className="service-card">
               <div className="service-icon">
-                <svg viewBox="0 0 24 24">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-13c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5z" />
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ fill: 'none' }}>
+                  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
                 </svg>
               </div>
               <h3>{t("prestations.card2.title")}</h3>
@@ -336,8 +337,8 @@ export default function Home() {
             {/* Card 3: Soirée */}
             <RevealOnScroll className="service-card">
               <div className="service-icon">
-                <svg viewBox="0 0 24 24">
-                  <path d="M12.3 22h-.1c-5.5 0-10-4.5-10-10 0-4.8 3.5-9 8.3-9.8.5-.1 1 .2 1.2.6.2.5 0 1.1-.4 1.4-1.9 1.4-2.9 3.7-2.9 6.1 0 4.1 3.3 7.4 7.4 7.4 2.4 0 4.7-1 6.1-2.9.3-.4.9-.6 1.4-.4.5.2.8.7.6 1.2-.8 4.8-5 8.3-9.8 8.3z" />
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ fill: 'none' }}>
+                  <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
                 </svg>
               </div>
               <h3>{t("prestations.card3.title")}</h3>
@@ -351,8 +352,9 @@ export default function Home() {
             {/* Card 4: Volume Russe */}
             <RevealOnScroll className="service-card">
               <div className="service-icon">
-                <svg viewBox="0 0 24 24">
-                  <path d="M12 6.5c-4.22 0-7.86 2.5-9.5 6 1.64 3.5 5.28 6 9.5 6s7.86-2.5 9.5-6c-1.64-3.5-5.28-6-9.5-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ fill: 'none' }}>
+                  <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/>
+                  <circle cx="12" cy="12" r="3"/>
                 </svg>
               </div>
               <h3>{t("prestations.card4.title")}</h3>
@@ -366,8 +368,9 @@ export default function Home() {
             {/* Card 5: Cil à Cil */}
             <RevealOnScroll className="service-card">
               <div className="service-icon">
-                <svg viewBox="0 0 24 24">
-                  <path d="M12 4c-5 0-9.27 3.11-11 7.5 1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5C21.27 7.11 17 4 12 4zm0 12.5c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ fill: 'none' }}>
+                  <path d="M12.67 19a2 2 0 0 0 1.416-.588l6.154-6.172a6 6 0 0 0-8.49-8.49L5.586 9.914A2 2 0 0 0 5 11.328V18a1 1 0 0 0 1 1z"/>
+                  <path d="M16 8 2 22"/><path d="M17.5 15H9"/>
                 </svg>
               </div>
               <h3>{t("prestations.card5.title")}</h3>
@@ -381,8 +384,9 @@ export default function Home() {
             {/* Card 6: Shooting */}
             <RevealOnScroll className="service-card">
               <div className="service-icon">
-                <svg viewBox="0 0 24 24">
-                  <path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V1c0-.55-.45-1-1-1s-1 .45-1 1v2.06C6.83 3.52 3.52 6.83 3.06 11H1c-.55 0-1 .45-1 1s.45 1 1 1h2.06c.46 4.17 3.77 7.48 7.94 7.94V23c0 .55.45 1 1 1s1-.45 1-1v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23c.55 0 1-.45 1-1s-.45-1-1-1h-2.06zM12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ fill: 'none' }}>
+                  <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+                  <circle cx="12" cy="13" r="3"/>
                 </svg>
               </div>
               <h3>{t("prestations.card6.title")}</h3>
