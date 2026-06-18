@@ -87,7 +87,47 @@ export default function Services() {
       price: "950 DH",
       priceInfo: t("services.detail.shooting.priceInfo"),
     },
+    {
+      id: "volume-russe",
+      tagline: t("services.detail.tagline.volume_russe"),
+      title: t("services.detail.volume_russe.title"),
+      desc: t("services.detail.volume_russe.desc"),
+      inclusions: [
+        t("services.detail.volume_russe.inc1"),
+        t("services.detail.volume_russe.inc2"),
+        t("services.detail.volume_russe.inc3"),
+      ],
+      price: "540 DH",
+      priceInfo: t("services.detail.volume_russe.priceInfo"),
+    },
+    {
+      id: "cil-a-cil",
+      tagline: t("services.detail.tagline.cil_a_cil"),
+      title: t("services.detail.cil_a_cil.title"),
+      desc: t("services.detail.cil_a_cil.desc"),
+      inclusions: [
+        t("services.detail.cil_a_cil.inc1"),
+        t("services.detail.cil_a_cil.inc2"),
+        t("services.detail.cil_a_cil.inc3"),
+      ],
+      price: "320 DH",
+      priceInfo: t("services.detail.cil_a_cil.priceInfo"),
+    },
+    {
+      id: "tous-les-jours",
+      tagline: t("services.detail.tagline.tous_les_jours"),
+      title: t("services.detail.tous_les_jours.title"),
+      desc: t("services.detail.tous_les_jours.desc"),
+      inclusions: [
+        t("services.detail.tous_les_jours.inc1"),
+        t("services.detail.tous_les_jours.inc2"),
+        t("services.detail.tous_les_jours.inc3"),
+      ],
+      price: "500 DH",
+      priceInfo: t("services.detail.tous_les_jours.priceInfo"),
+    },
   ];
+
 
   const faqs = [
     {

@@ -16,21 +16,21 @@ const RevealOnScroll = dynamic(() => import("@/components/RevealOnScroll"), {
 const GALLERY_ITEMS = [
   {
     id: 1,
-    src: "/assets/gallery-bridal.png",
+    src: "/assets/gallery-bridal-v2.png",
     alt: "Sophisticated Marrakech bridal soft glam look",
     categoryKey: "gallery.category.mariage",
     titleKey: "gallery.title1",
   },
   {
     id: 2,
-    src: "/assets/gallery-glam.png",
+    src: "/assets/gallery-glam-v2.png",
     alt: "Prestige evening makeup in Marrakech by Sarahglam's",
     categoryKey: "gallery.category.glam",
     titleKey: "gallery.title2",
   },
   {
     id: 3,
-    src: "/assets/hero-makeup.png",
+    src: "/assets/gallery-fiancailles-v2.png",
     alt: "Engagement glow makeup Marrakech",
     categoryKey: "gallery.category.fiancailles",
     titleKey: "gallery.title3",
@@ -55,7 +55,7 @@ export default function Home() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // WhatsApp Config
-  const WHATSAPP_NUMBER = "212612345678";
+  const WHATSAPP_NUMBER = "212784477494";
 
   // Handle Form Change
   const handleInputChange = (
@@ -191,7 +191,7 @@ export default function Home() {
           <div className="hero-visual reveal active">
             <div className="hero-img-frame">
               <Image
-                src="/assets/hero-makeup.png"
+                src="/assets/hero-makeup-v2.png"
                 alt="Prestige bridal makeup in Marrakech by Sarahglam's"
                 width={600}
                 height={750}
@@ -347,6 +347,66 @@ export default function Home() {
                 850 DH
               </div>
             </RevealOnScroll>
+
+            {/* Card 4: Volume Russe */}
+            <RevealOnScroll className="service-card">
+              <div className="service-icon">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 6.5c-4.22 0-7.86 2.5-9.5 6 1.64 3.5 5.28 6 9.5 6s7.86-2.5 9.5-6c-1.64-3.5-5.28-6-9.5-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
+                </svg>
+              </div>
+              <h3>{t("prestations.card4.title")}</h3>
+              <p className="service-desc">{t("prestations.card4.desc")}</p>
+              <div className="service-price">
+                <span>{t("prestations.card4.price_label")}</span>
+                540 DH
+              </div>
+            </RevealOnScroll>
+
+            {/* Card 5: Cil à Cil */}
+            <RevealOnScroll className="service-card">
+              <div className="service-icon">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4c-5 0-9.27 3.11-11 7.5 1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5C21.27 7.11 17 4 12 4zm0 12.5c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                </svg>
+              </div>
+              <h3>{t("prestations.card5.title")}</h3>
+              <p className="service-desc">{t("prestations.card5.desc")}</p>
+              <div className="service-price">
+                <span>{t("prestations.card5.price_label")}</span>
+                320 DH
+              </div>
+            </RevealOnScroll>
+
+            {/* Card 6: Shooting */}
+            <RevealOnScroll className="service-card">
+              <div className="service-icon">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V1c0-.55-.45-1-1-1s-1 .45-1 1v2.06C6.83 3.52 3.52 6.83 3.06 11H1c-.55 0-1 .45-1 1s.45 1 1 1h2.06c.46 4.17 3.77 7.48 7.94 7.94V23c0 .55.45 1 1 1s1-.45 1-1v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23c.55 0 1-.45 1-1s-.45-1-1-1h-2.06zM12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+                </svg>
+              </div>
+              <h3>{t("prestations.card6.title")}</h3>
+              <p className="service-desc">{t("prestations.card6.desc")}</p>
+              <div className="service-price">
+                <span>{t("prestations.card6.price_label")}</span>
+                950 DH
+              </div>
+            </RevealOnScroll>
+
+            {/* Card 7: Tous les jours */}
+            <RevealOnScroll className="service-card">
+              <div className="service-icon">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+                </svg>
+              </div>
+              <h3>{t("prestations.card7.title")}</h3>
+              <p className="service-desc">{t("prestations.card7.desc")}</p>
+              <div className="service-price">
+                <span>{t("prestations.card7.price_label")}</span>
+                500 DH
+              </div>
+            </RevealOnScroll>
           </div>
 
           <RevealOnScroll className="reveal" style={{ textAlign: "center", marginTop: "3.5rem" }}>
@@ -497,7 +557,7 @@ export default function Home() {
                 </div>
                 <div className="meta-text">
                   <h5>{t("booking.email_title")}</h5>
-                  <p>contact@sarahglams.com</p>
+                  <p>sarahglams6@gmail.com</p>
                 </div>
               </div>
 
@@ -509,7 +569,7 @@ export default function Home() {
                 </div>
                 <div className="meta-text">
                   <h5>{t("booking.phone_title")}</h5>
-                  <p>+212 6 12 34 56 78</p>
+                  <p>+212 7 84 47 74 94</p>
                 </div>
               </div>
             </div>
@@ -586,6 +646,9 @@ export default function Home() {
                   <option value="Maquillage Soirée">{t("booking.form.service_opt3")}</option>
                   <option value="Maquillage Invitée">{t("booking.form.service_opt4")}</option>
                   <option value="Maquillage Shooting">{t("booking.form.service_opt5")}</option>
+                  <option value="Extension de cils Volume Russe">{t("booking.form.service_opt7")}</option>
+                  <option value="Extension de cils Cil à Cil">{t("booking.form.service_opt8")}</option>
+                  <option value="Maquillage Tous Les Jours">{t("booking.form.service_opt9")}</option>
                   <option value="Autre">{t("booking.form.service_opt6")}</option>
                 </select>
               </div>
@@ -636,18 +699,18 @@ export default function Home() {
             <span className="script-accent">{t("socials.tagline")}</span>
             <h2 className="social-title">{t("socials.title")}</h2>
             <a
-              href="https://instagram.com/sarahglams"
+              href="https://www.instagram.com/sarahglam.s"
               target="_blank"
               rel="noopener noreferrer"
               className="social-handle"
             >
-              @sarahglams
+              @sarahglam.s
             </a>
 
             <div className="social-icons">
               {/* Instagram */}
               <a
-                href="https://instagram.com/sarahglams"
+                href="https://www.instagram.com/sarahglam.s"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-btn"
@@ -671,7 +734,7 @@ export default function Home() {
               </a>
               {/* TikTok */}
               <a
-                href="https://tiktok.com/@sarahglams"
+                href="https://www.tiktok.com/@sarahglams0"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-btn"
@@ -683,7 +746,7 @@ export default function Home() {
               </a>
               {/* Snapchat */}
               <a
-                href="https://snapchat.com/add/sarahglams"
+                href="https://snapchat.com/t/9aXMpWsa"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-btn"

@@ -39,8 +39,8 @@ export default function Footer() {
         <div className="footer-contact">
           <h4>{t("footer.contact_title")}</h4>
           <ul className="footer-contact-list">
-            <li><strong>{t("footer.contact.whatsapp")}</strong> +212 6 12 34 56 78</li>
-            <li><strong>{t("footer.contact.email")}</strong> contact@sarahglams.com</li>
+            <li><strong>{t("footer.contact.whatsapp")}</strong> +212 7 84 47 74 94</li>
+            <li><strong>{t("footer.contact.email")}</strong> sarahglams6@gmail.com</li>
             <li><strong>{t("footer.contact.address")}</strong> {t("booking.address_text")}</li>
             <li><strong>{t("footer.contact.sector")}</strong> {t("footer.contact.sector_val")}</li>
           </ul>
