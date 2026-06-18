@@ -126,6 +126,19 @@ export default function Services() {
       price: "500 DH",
       priceInfo: t("services.detail.tous_les_jours.priceInfo"),
     },
+    {
+      id: "express",
+      tagline: t("services.detail.tagline.express"),
+      title: t("services.detail.express.title"),
+      desc: t("services.detail.express.desc"),
+      inclusions: [
+        t("services.detail.express.inc1"),
+        t("services.detail.express.inc2"),
+        t("services.detail.express.inc3"),
+      ],
+      price: "400 DH",
+      priceInfo: t("services.detail.express.priceInfo"),
+    },
   ];
 
 

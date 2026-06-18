@@ -392,21 +392,6 @@ export default function Home() {
                 950 DH
               </div>
             </RevealOnScroll>
-
-            {/* Card 7: Tous les jours */}
-            <RevealOnScroll className="service-card">
-              <div className="service-icon">
-                <svg viewBox="0 0 24 24">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
-                </svg>
-              </div>
-              <h3>{t("prestations.card7.title")}</h3>
-              <p className="service-desc">{t("prestations.card7.desc")}</p>
-              <div className="service-price">
-                <span>{t("prestations.card7.price_label")}</span>
-                500 DH
-              </div>
-            </RevealOnScroll>
           </div>
 
           <RevealOnScroll className="reveal" style={{ textAlign: "center", marginTop: "3.5rem" }}>
@@ -649,6 +634,7 @@ export default function Home() {
                   <option value="Extension de cils Volume Russe">{t("booking.form.service_opt7")}</option>
                   <option value="Extension de cils Cil à Cil">{t("booking.form.service_opt8")}</option>
                   <option value="Maquillage Tous Les Jours">{t("booking.form.service_opt9")}</option>
+                  <option value="Maquillage Express">{t("booking.form.service_opt10")}</option>
                   <option value="Autre">{t("booking.form.service_opt6")}</option>
                 </select>
               </div>
